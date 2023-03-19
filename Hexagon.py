@@ -17,5 +17,14 @@ class Hexagon:
         self.x6 = self.origin_x - self.hex_width/4
         self.y6 = self.origin_y + self.hex_height/2
 
+    
+    def rotate90(self):
+        self.x1, self.y1 = self.y1, self.x1
+        self.x2, self.y2 = self.y2, self.x2
+        self.x3, self.y3 = self.y3, self.x3
+        self.x4, self.y4 = self.y4, self.x4
+        self.x5, self.y5 = self.y5, self.x5
+        self.x6, self.y6 = self.y6, self.x6
+
         
 
