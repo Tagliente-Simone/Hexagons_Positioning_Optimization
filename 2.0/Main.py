@@ -2,6 +2,7 @@ import Hexagon as hx
 import Draw as dr
 import ResultPrinter as rp
 import csv
+import math
 ## This function places the vertical line of hexagons
 
 def place_vertical_hexagon(hexagons_no_rot, origin_x, origin_y, hex_width, hex_height, hex_side):
@@ -85,7 +86,7 @@ def test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side):
 
         ## Update the position of the first hexagon of the new line
         if line_index % 2 == 1:
-            origin_x += hex_width - (hex_width - hex_side)/2 + 0.3
+            origin_x += hex_width - (hex_width - hex_side)/2 + 0.3/(math.cos(math.atan((hex_width - hex_side) / hex_height)))
             origin_y = start_origin_y + hex_height/2 + 0.3/2
 
         else:
@@ -129,7 +130,7 @@ def test_rotation(hexagons_rot, hex_width, hex_height, hex_side):
 
     ## Update the position of the first hexagon of the new line
         if line_index % 2 == 1:
-            origin_x += hex_width - (hex_width - hex_side)/2  + 0.3
+            origin_x += hex_width - (hex_width - hex_side)/2  + 0.3/(math.cos(math.atan((hex_width - hex_side) / hex_height)))
             origin_y = start_origin_y + hex_height/2 + 0.3/2
 
         else:
