@@ -43,3 +43,6 @@ for rows in input:
     index += 1
 
 
+print("Done! You can find the result in the result.csv file and the images in the images folder.")
+
+

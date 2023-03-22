@@ -128,11 +128,6 @@ def test_rotation(hexagons_rot, hex_width, hex_height, hex_side):
 
     ## Update the position of the first hexagon of the new line
         if line_index % 2 == 1:
-            print("hex_height: " + str(hex_height))
-            print("hex_width: " + str(hex_width))
-            print("hex_side: " + str(hex_side))
-            print("atan: " + str(math.atan(hex_height) / (hex_width - hex_side)))
-            print("sin: " + str(math.sin(math.atan(hex_height) / (hex_width - hex_side))))
             origin_x += hex_width - (hex_width - hex_side)/2  + 0.3/(math.sin(math.atan((hex_height) / ((hex_width - hex_side)))))
             origin_y = start_origin_y + hex_height/2 + 0.3/2
 
@@ -202,19 +197,12 @@ def compute(hex_width, hex_height, hex_side, index):
 
     len_rotation = test_rotation(hexagons_rot, hex_width, hex_height, hex_side)
 
-    print(len_no_rotation)
-    print(len_rotation)
-
     if(len_no_rotation > len_rotation):
-        print("Parallel to x-axis is better ")
-        print("Origin of the first hexagon = " + str(120 - hexagons_no_rot[0].origin_x) + " " + str(100 - hexagons_no_rot[0].origin_y))
         dr.draw_rectangle(hexagons_no_rot, hex_width, hex_height, hex_side, "no_rotation", index)
         create_csv_result(120 - hexagons_no_rot[0].origin_x, 100 - hexagons_no_rot[0].origin_y, "parallela")
         
         
     else:
-        print("Perpendicular to x-axis is better")
-        print("Origin of the first hexagon = " + str(120 - hexagons_rot[0].origin_x) + " " + str(100 - hexagons_rot[0].origin_y))
         dr.draw_rectangle(hexagons_rot, hex_width, hex_height, hex_side, "rotation", index)
         create_csv_result(120 - hexagons_rot[0].origin_x, 100 - hexagons_rot[0].origin_y, "perpendicolare")
 
