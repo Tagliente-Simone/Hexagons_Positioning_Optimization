@@ -1,6 +1,8 @@
 import math
 import Main as m
 
+## Calculate the dimension of the hexagon
+
 def Calculate(radius, n_rows, rows_array, index):
 
     k = n_rows / 2

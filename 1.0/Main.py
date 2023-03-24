@@ -164,9 +164,8 @@ def centering_no_rotation(hexagons_no_rot, highest_y, hex_width, hex_height, hex
     
     for hexagon in hexagons_no_rot:
         hexagon.origin_x += distance_x/2
-        hexagon.update_x_points(distance_x/2)
         hexagon.origin_y += distance_y/2
-        hexagon.update_y_points(distance_y/2)
+        hexagon.update_points(distance_x/2, distance_y/2)
 
 def centering_rotation(hexagons_rot, highest_x, hex_width, hex_height, hex_side):
 
@@ -181,9 +180,8 @@ def centering_rotation(hexagons_rot, highest_x, hex_width, hex_height, hex_side)
 
     for hexagon in hexagons_rot:
         hexagon.origin_y += distance_y/2
-        hexagon.update_y_points(distance_y/2)
         hexagon.origin_x += distance_x/2
-        hexagon.update_x_points(distance_x/2)
+        hexagon.update_points(distance_x/2, distance_y/2)
 
 
 ## Main Function calls

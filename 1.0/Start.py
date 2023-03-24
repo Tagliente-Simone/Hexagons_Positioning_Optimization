@@ -30,13 +30,19 @@ def create_csv_result(x, y, orientation):
 
 index = 2
 
+## Main Function calls
+# Iterate over each row in the CSV file
 for rows in input:
     rows_array = [float(i) for i in rows[1].split('-')]
     if(len(rows_array) % 2 == 1):
         n_rows = len(rows_array)
         radius = float(rows[0])
         radius = radius / 20
+
+        #Call the function to calculate the dimension of the hexagon
+
         calc.Calculate(radius, n_rows, rows_array, index)
+
     else:
         print("Error: the number of rows must be odd")
         create_csv_result(000, 000, "error")

@@ -14,12 +14,7 @@ def draw_rectangle(hexagons, hex_width, hex_height, hex_side, rotation, index):
     ax.add_patch(rect)
 
     for hexagon in hexagons:
-        verts = [(hexagon.x1, hexagon.y1), 
-                 (hexagon.x2, hexagon.y2), 
-                 (hexagon.x3, hexagon.y3), 
-                 (hexagon.x4, hexagon.y4), 
-                 (hexagon.x5, hexagon.y5), 
-                 (hexagon.x6, hexagon.y6)]
+        verts = hexagon.verts
         
         hexagon_polygon = Polygon(verts, fill=False)
         ax.add_patch(hexagon_polygon)
@@ -30,4 +25,4 @@ def draw_rectangle(hexagons, hex_width, hex_height, hex_side, rotation, index):
 
     # Display the plot
     ##plt.show()
-    plt.savefig("./images/" + str(index) + 'hexagon' + str(hex_width) + str(hex_height) + str(hex_side) + rotation + '.png', dpi=300)
+    ##plt.savefig("./images/" + str(index) + 'hexagon' + str(hex_width) + str(hex_height) + str(hex_side) + rotation + '.png', dpi=300)
