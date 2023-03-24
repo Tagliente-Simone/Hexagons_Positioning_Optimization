@@ -1,10 +1,15 @@
 import csv
 import numpy as np
 import CalculateDimension as calc
-import ResultPrinter as rp
+import pandas as pd
+
+def create_csv_result(x, y, orientation):
+    with open('./resources/result.csv', 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([x, y, orientation])
 
 # Open the CSV file
-with open('combinazioni.csv', 'r') as file:
+with open('./resources/combinazioni.csv', 'r') as file:
     # Create a CSV reader object
     reader = csv.reader(file)
     # Iterate over each row in the CSV file
@@ -18,16 +23,8 @@ with open('combinazioni.csv', 'r') as file:
     
 
 input = np.array([column_dest, column_compo], dtype = 'str')
-
 input = np.transpose(input)
-
 input = np.delete(input, 0, 0)
-
-def create_csv_result(x, y, orientation):
-    with open('result.csv', 'a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow([x, y, orientation])
-
 index = 2
 
 ## Main Function calls
@@ -40,7 +37,6 @@ for rows in input:
         radius = radius / 20
 
         #Call the function to calculate the dimension of the hexagon
-
         calc.Calculate(radius, n_rows, rows_array, index)
 
     else:
@@ -48,7 +44,13 @@ for rows in input:
         create_csv_result(000, 000, "error")
     index += 1
 
+# Merge the two CSV files
+combinations = pd.read_csv('./resources/combinazioni.csv', header=None)
+results = pd.read_csv('./resources/result.csv', header=None)
+merged = pd.concat([combinations, results], axis=1)
+merged.to_csv('./resources/merged.csv', index=False)
 
-print("Done! You can find the result in the result.csv file and the images in the images folder.")
+print("Done! You can find the result in the merged.csv file and the images in the images folder.")
+
 
 

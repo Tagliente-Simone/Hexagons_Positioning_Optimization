@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib.patches import Polygon
-import Hexagon as hx
 
 def draw_rectangle(hexagons, hex_width, hex_height, hex_side, rotation, index):
     # Create a rectangle object with width=120 and height=100
@@ -26,3 +25,6 @@ def draw_rectangle(hexagons, hex_width, hex_height, hex_side, rotation, index):
     # Display the plot
     ##plt.show()
     ##plt.savefig("./images/" + str(index) + 'hexagon' + str(hex_width) + str(hex_height) + str(hex_side) + rotation + '.png', dpi=300)
+
+    plt.close()
+

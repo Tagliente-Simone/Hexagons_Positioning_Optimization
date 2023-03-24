@@ -1,6 +1,5 @@
 import Hexagon as hx
 import Draw as dr
-import ResultPrinter as rp
 import csv
 import math
 ## This function places the vertical line of hexagons
@@ -206,7 +205,7 @@ def compute(hex_width, hex_height, hex_side, index):
 
 
 def create_csv_result(x, y, orientation):
-    with open('result.csv', 'a', newline='') as file:
+    with open('./resources/result.csv', 'a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow([x, y, orientation])
 
