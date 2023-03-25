@@ -2,6 +2,7 @@ import csv
 import numpy as np
 import CalculateDimension as calc
 import pandas as pd
+import os 
 
 def create_csv_result(x, y, orientation):
     with open('./resources/result.csv', 'a', newline='') as file:
@@ -9,6 +10,11 @@ def create_csv_result(x, y, orientation):
         writer.writerow([x, y, orientation])
 
 def main():
+
+    os.remove('./resources/result.csv')
+    print("result.csv file deleted")
+    os.remove('./resources/merged.csv')
+    print("merged.csv file deleted")
 
 # Open the CSV file
     with open('./resources/combinazioni.csv', 'r') as file:
