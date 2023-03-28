@@ -43,7 +43,7 @@ def inject_compo():
 def load_image():
     # Load the image file
     image = Image.open("./images/test.png")
-    image = image.resize((240, 200))  # Resize the image to fit in the window
+    image = image.resize((480, 400))  # Resize the image to fit in the window
     photo = ImageTk.PhotoImage(image)
     
     # Set the image on the label widget
@@ -69,8 +69,7 @@ def startcomputation():
 window = tk.Tk()
 window.title("My GUI")
 
-window.geometry("800x400")
-
+window.geometry("800x480")
 # Create an empty label to hold the image
 label = tk.Label(window)
 label.pack()
