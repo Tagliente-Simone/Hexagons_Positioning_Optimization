@@ -69,10 +69,10 @@ def startcomputation():
 window = tk.Tk()
 window.title("My GUI")
 
-window.geometry("800x480")
+window.geometry("1000x480")
 # Create an empty label to hold the image
 label = tk.Label(window)
-label.pack()
+label.place(x=500, y=0)
 
 label_dest = tk.Label(window, text="Diametro esterno:")
 textbox_dest = tk.Entry(window)
@@ -81,6 +81,8 @@ label_compo = tk.Label(window, text="Composizione:")
 textbox_compo = tk.Entry(window)
 
 button_start = tk.Button(window, text="Start", command=startcomputation)
+
+window.resizable(False, False)
 
 
 label_dest.place(x=10, y=30)
