@@ -5,13 +5,21 @@ import Main as m
 
 def Calculate(radius, n_rows, rows_array, index):
 
-    k = n_rows / 2
     B_min = 2 * radius * (max(rows_array) - 1)
-    b_min = 2 * radius * (rows_array[0] - 1)
-    h_min = k * radius * math.sqrt(3)
+    b_min = 2 * radius * (min(rows_array) - 1)
+    obl_min = int(n_rows / 2) * radius * 2
 
-    B_max = B_min * (1 + 1/(k * math.sqrt(3)))
-    b_max = b_min * (1 + 1/(k * math.sqrt(3)))
-    h_max = h_min * (1 + 1/(k * math.sqrt(3)))
+    temp = (B_min - b_min) / 2
 
-    m.compute(h_max * 2, B_max, b_max, index)
+    h_min = math.sqrt(obl_min ** 2 - temp ** 2)
+
+    h_max = h_min + radius
+
+    k = h_max / h_min
+
+    B_max = B_min * k
+    b_max = b_min * k
+
+
+
+    return m.compute(B_max, h_max * 2, b_max, index)

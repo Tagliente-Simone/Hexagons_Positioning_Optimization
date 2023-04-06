@@ -47,19 +47,16 @@ def place_vertical_hexagon_rotated(hexagons_rot, origin_x, origin_y, hex_width, 
     return last_origin_y
 
 ## Variables for the rectangle
-rect_width = 120
-rect_height = 100
+rect_width = 124
+rect_height = 104
 
 ## Variables for the hexagons
-
-
-
 len_no_rotation = 0
 len_rotation = 0
 
 
 
-def test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side):
+def test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side, index):
 
     ## Variables for the origin of the first hexagon
     start_origin_x = hex_width/2
@@ -76,7 +73,9 @@ def test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side):
     ## Start placing the hexagons
     while True:
 
-       
+        ## Check if the line is out of the rectangle
+        if origin_x + hex_width/2 > rect_width:
+            break
 
         last_origin_y = place_vertical_hexagon(hexagons_no_rot, origin_x, origin_y, hex_width, hex_height, hex_side)
 
@@ -94,17 +93,15 @@ def test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side):
 
 
         line_index += 1
-        ## Check if the line is out of the rectangle
-        if origin_x + hex_width/2 > rect_width:
-            break
+        
     
     ## Draw the hexagons to see the result
     len_no_rotation = len(hexagons_no_rot)
     centering_no_rotation(hexagons_no_rot, highest_y, hex_width, hex_height, hex_side)
-
+    dr.draw_rectangle(hexagons_no_rot, hex_width, hex_height, hex_side, "no_rotation", index)
     return len_no_rotation
     
-def test_rotation(hexagons_rot, hex_width, hex_height, hex_side):
+def test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index):
 
     ## Variables for the origin of the first hexagon
     start_origin_x = hex_width/2
@@ -119,7 +116,13 @@ def test_rotation(hexagons_rot, hex_width, hex_height, hex_side):
     highest_x = 0
 
     while True:
-    ## Start placing the hexagons
+
+    
+        ## Check if the line is out of the rectangle
+        if origin_x + hex_width/2 > rect_height:
+            break
+        
+        ## Start placing the hexagons
         last_origin_x = place_vertical_hexagon_rotated(hexagons_rot, origin_x, origin_y, hex_width, hex_height, hex_side)
 
         if last_origin_x > highest_x:
@@ -136,13 +139,13 @@ def test_rotation(hexagons_rot, hex_width, hex_height, hex_side):
 
         line_index += 1
 
-        ## Check if the line is out of the rectangle
-        if origin_x + hex_width/2 > rect_height:
-            break
+        
 
     ## Draw the hexagons to see the result
     len_rotation = len(hexagons_rot)
     centering_rotation(hexagons_rot, highest_x, hex_width, hex_height, hex_side)
+
+    dr.draw_rectangle(hexagons_rot, hex_width, hex_height, hex_side, "rotation", index)
 
     
 
@@ -190,19 +193,23 @@ def compute(hex_width, hex_height, hex_side, index):
     hexagons_no_rot = []
     hexagons_rot = []
 
-    len_no_rotation = test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side)
+    len_no_rotation = test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side, index)
 
-    len_rotation = test_rotation(hexagons_rot, hex_width, hex_height, hex_side)
+    len_rotation = test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index)
+
+    
+    
 
     if(len_no_rotation > len_rotation):
-        dr.draw_rectangle(hexagons_no_rot, hex_width, hex_height, hex_side, "no_rotation", index)
+        dr.draw_rectangle(hexagons_no_rot, hex_width, hex_height, hex_side, "rotation", index)
         create_csv_result(120 - hexagons_no_rot[0].origin_x, 100 - hexagons_no_rot[0].origin_y, "parallela")
+        return len_no_rotation
         
         
     else:
         dr.draw_rectangle(hexagons_rot, hex_width, hex_height, hex_side, "rotation", index)
         create_csv_result(120 - hexagons_rot[0].origin_x, 100 - hexagons_rot[0].origin_y, "perpendicolare")
-
+        return len_rotation
 
 def create_csv_result(x, y, orientation):
     with open('./resources/result.csv', 'a', newline='') as file:
