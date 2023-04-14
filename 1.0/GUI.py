@@ -6,16 +6,7 @@ from PIL import ImageTk, Image
 dest = ""
 compo = ""
 
-compo_list = ["3-4-5-6-5-4-3", 
-              "4-5-6-7-6-5-4", 
-              "5-6-7-8-7-6-5", 
-              "6-7-8-9-8-7-6", 
-              "7-8-9-10-9-8-7", 
-              "4-5-6-5-4", 
-              "3-4-3",
-              "4-5-4", 
-              "5-6-5", 
-              "2-3-2"]
+compo_list = []
 
 def checkfloat(string):
     try:
@@ -69,6 +60,16 @@ def new_windows():
 
     max_found = 0;
     best_compo = "4-5-6-7-6-5-4"
+
+    if int(dest) >= 30 and int(dest)  < 40:
+        compo_list = ["5-6-7-8-7-6-5", "6-7-8-9-8-7-6", "7-8-9-10-9-8-7"]
+    elif int(dest)  >= 40 and int(dest)  < 50:
+        compo_list = ["6-7-8-9-8-7-6", "5-6-7-8-7-6-5", "4-5-6-5-4"]
+    elif int(dest)  >= 50 and int(dest)  < 70:
+        compo_list = ["4-5-6-5-4", "4-5-6-7-6-5-4", "3-4-5-4-3"]
+    elif int(dest)  >= 60:
+        compo_list = ["3-4-5-4-3", "2-3-4-3-2", "3-4-3", "2-3-2"]
+
 
     for i in range(0, len(compo_list)):
         rows_array = [float(i) for i in compo_list[i].split('-')]

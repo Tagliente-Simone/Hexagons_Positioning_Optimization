@@ -34,7 +34,7 @@ def draw_rectangle(hexagons, hex_width, hex_height, hex_side, rotation, index):
     #plt.show()
     if (index == 9999):
         plt.savefig("./images/test.png", dpi=300)
-    plt.savefig("./images/" + str(index) + 'hexagon' + str(hex_width) + str(hex_height) + str(hex_side) + rotation + '.png', dpi=300)
+    ##plt.savefig("./images/" + str(index) + 'hexagon' + str(hex_width) + str(hex_height) + str(hex_side) + rotation + '.png', dpi=300)
 
     plt.close()
 
