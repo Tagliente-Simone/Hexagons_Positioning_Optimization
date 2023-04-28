@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib.patches import Polygon
 
-def draw_rectangle(hexagons, hex_width, hex_height, hex_side, rotation, index):
+def draw_rectangle(rectangles, index):
     # Create a rectangle object with width=120 and height=100
     rect = Rectangle((0, 0), 125, 105)
 
@@ -15,11 +15,12 @@ def draw_rectangle(hexagons, hex_width, hex_height, hex_side, rotation, index):
     # Add the rectangle to the axes
     ax.add_patch(rect)
 
-    for hexagon in hexagons:
-        verts = hexagon.verts
+    for rectangle in rectangles:
         
-        hexagon_polygon = Polygon(verts, fill=False)
-        ax.add_patch(hexagon_polygon)
+        verts = rectangle.verts
+        
+        rectangle_polygon = Polygon(verts, fill=False)
+        ax.add_patch(rectangle_polygon)
         
     # Set the limits of the axes
 
@@ -32,9 +33,8 @@ def draw_rectangle(hexagons, hex_width, hex_height, hex_side, rotation, index):
 
     # Display the plot
     #plt.show()
-    if (index == 9999):
-        plt.savefig("./images/test.png", dpi=300)
+    #if (index == 9999):
+    plt.savefig("./images/test.png", dpi=300)
     ##plt.savefig("./images/" + str(index) + 'hexagon' + str(hex_width) + str(hex_height) + str(hex_side) + rotation + '.png', dpi=300)
 
     plt.close()
-

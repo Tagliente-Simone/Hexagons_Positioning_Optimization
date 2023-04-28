@@ -43,7 +43,7 @@ def inject_compo():
 def load_image():
     # Load the image file
     image = Image.open("./images/test.png")
-    image = image.resize((480, 400))  # Resize the image to fit in the window
+    image = image.resize((720, 600))  # Resize the image to fit in the window
     photo = ImageTk.PhotoImage(image)
     
     # Set the image on the label widget
@@ -61,13 +61,13 @@ def new_windows():
     max_found = 0;
     best_compo = "4-5-6-7-6-5-4"
 
-    if int(dest) >= 30 and int(dest)  < 40:
+    if float(dest) >= 30 and float(dest)  < 40:
         compo_list = ["5-6-7-8-7-6-5", "6-7-8-9-8-7-6", "7-8-9-10-9-8-7"]
-    elif int(dest)  >= 40 and int(dest)  < 50:
+    elif float(dest)  >= 40 and float(dest)  < 50:
         compo_list = ["6-7-8-9-8-7-6", "5-6-7-8-7-6-5", "4-5-6-5-4"]
-    elif int(dest)  >= 50 and int(dest)  < 70:
+    elif float(dest)  >= 50 and float(dest)  < 70:
         compo_list = ["4-5-6-5-4", "4-5-6-7-6-5-4", "3-4-5-4-3"]
-    elif int(dest)  >= 60:
+    elif float(dest)  >= 60:
         compo_list = ["3-4-5-4-3", "2-3-4-3-2", "3-4-3", "2-3-2"]
 
 
@@ -105,10 +105,10 @@ def startcomputation():
 window = tk.Tk()
 window.title("My GUI")
 
-window.geometry("1000x480")
+window.geometry("1000x700")
 # Create an empty label to hold the image
 label = tk.Label(window)
-label.place(x=500, y=0)
+label.place(x=300, y=0)
 
 label_dest = tk.Label(window, text="Diametro esterno:")
 textbox_dest = tk.Entry(window)
