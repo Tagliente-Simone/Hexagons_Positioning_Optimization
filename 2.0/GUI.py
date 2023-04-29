@@ -64,7 +64,7 @@ window.title("My GUI")
 
 # Create an empty label to hold the image
 label = tk.Label(window)
-label.place(x=300, y=0)
+label.place(x=300, y=80)
 
 window.geometry("1000x700")
 window.resizable(False, False)
@@ -84,8 +84,8 @@ textbox_max = tk.Entry(window)
 label_dest.place(x=10, y=30)
 textbox_dest.place(x=10, y=50)
 
-label_rows.place(x=150, y=30)
-textbox_rows.place(x=150, y=50)
+label_rows.place(x=190, y=30)
+textbox_rows.place(x=190, y=50)
 
 label_min.place(x=10, y=100)
 textbox_min.place(x=10, y=120)
@@ -98,7 +98,7 @@ label_total.place(x=10, y=250)
 
 button_start = tk.Button(window, text="Start", command=startcomputation)
 
-button_start.place(x=10, y=190)
+button_start.place(x=10, y=200)
 
 
 window.mainloop()
