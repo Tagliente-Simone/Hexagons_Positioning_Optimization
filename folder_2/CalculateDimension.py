@@ -1,5 +1,5 @@
-import math
-import Main as m
+from folder_2 import Main as m
+
 
 
 def compute(radius, min, max, rows):
@@ -23,9 +23,7 @@ def compute(radius, min, max, rows):
     else:
         ratio = l/L
 
-    print("rectangle: " + str(L) + "x" + str(l))
 
-    print("ratio: " + str(ratio))
 
     if ratio > 1.14 or ratio < 1.12:
         print("ratio not good")
@@ -33,8 +31,6 @@ def compute(radius, min, max, rows):
 
     rectangle = m.main(L, l)
 
-    
-    print(int(int(rows) / 2), int(rows) - int(int(rows) / 2))
     total_tubes = len(rectangle) * (max * (int(int(rows) / 2)) + min * (int(rows) - int(int(rows) / 2)))
     
     

@@ -1,5 +1,5 @@
-import Hexagon as hx
-import Draw as dr
+from folder_1 import Hexagon as hx
+from folder_1 import Draw as dr
 import csv
 import math
 ## This function places the vertical line of hexagons
@@ -194,27 +194,16 @@ def compute(hex_width, hex_height, hex_side, index):
     hexagons_rot = []
 
     len_no_rotation = test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side, index)
-
     len_rotation = test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index)
 
-    
-    
-
     if(len_no_rotation > len_rotation):
-        dr.draw_rectangle(hexagons_no_rot, hex_width, hex_height, hex_side, "rotation", index)
-        create_csv_result(120 - hexagons_no_rot[0].origin_x, 100 - hexagons_no_rot[0].origin_y, "parallela")
+        #dr.draw_rectangle(hexagons_no_rot, hex_width, hex_height, hex_side, "rotation", index)
         return len_no_rotation
         
         
     else:
-        dr.draw_rectangle(hexagons_rot, hex_width, hex_height, hex_side, "rotation", index)
-        create_csv_result(120 - hexagons_rot[0].origin_x, 100 - hexagons_rot[0].origin_y, "perpendicolare")
+        #dr.draw_rectangle(hexagons_rot, hex_width, hex_height, hex_side, "rotation", index)
         return len_rotation
-
-def create_csv_result(x, y, orientation):
-    with open('./resources/result.csv', 'a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow([x, y, orientation])
 
 
 

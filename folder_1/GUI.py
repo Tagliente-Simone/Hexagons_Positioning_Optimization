@@ -68,7 +68,7 @@ def new_windows():
     elif float(dest)  >= 50 and float(dest)  < 70:
         compo_list = ["4-5-6-5-4", "4-5-6-7-6-5-4", "3-4-5-4-3"]
     elif float(dest)  >= 60:
-        compo_list = ["3-4-5-4-3", "2-3-4-3-2", "3-4-3", "2-3-2"]
+        compo_list = ["3-4-5-4-3", "3-4-3"]
 
 
     for i in range(0, len(compo_list)):

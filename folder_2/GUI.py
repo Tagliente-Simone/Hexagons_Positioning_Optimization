@@ -46,6 +46,29 @@ def startcomputation():
     label_total.config(text="Total tubes: " + str(int(total_tubes)))
     load_image()
 
+def startcomputation_test():
+
+    new_window = tk.Toplevel(window)
+    new_window.title("Composizione")
+    new_window.geometry("300x300")
+
+    inject_dest()
+    rows = [(4, 5), (6, 7)]
+
+    max_number = 0
+    best_config = (0, 0)
+
+    for row in rows:
+        
+        total_tubes = calc.compute(float(dest)/20, row[0], row[1], row[1])
+        if total_tubes > max_number:
+            max_number = total_tubes
+            best_config = row
+    
+    label_best = tk.Label(new_window, text="Best configuration: " + str(best_config[0]) + "-" + str(best_config[1]) + "  rows: " + str(best_config[1])).place(x=10, y=30)
+    label_total.config(text="Total tubes: " + str(int(max_number)))
+    load_image()
+
 def load_image():
     # Load the image file
     image = Image.open("./images/test.png")
@@ -98,7 +121,10 @@ label_total.place(x=10, y=250)
 
 button_start = tk.Button(window, text="Start", command=startcomputation)
 
-button_start.place(x=10, y=190)
+button_start.place(x=10, y=200)
+
+button_test = tk.Button(window, text="Test", command=startcomputation_test)
+button_test.place(x=50, y=200)
 
 
 window.mainloop()

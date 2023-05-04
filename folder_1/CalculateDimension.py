@@ -1,5 +1,5 @@
 import math
-import Main as m
+from folder_1 import Main as m
 import csv
 
 ## Calculate the dimension of the hexagon
@@ -25,8 +25,6 @@ def Calculate(radius, n_rows, rows_array, index):
 
     B_max = B_min * k
     b_max = b_min * k
-
-    print("ratio", b_max / (h_max * 2))
 
     #create_csv_result(B_max / b_max, b_max / h_max, B_max / h_max, radius * 20, rows_array)
 

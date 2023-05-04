@@ -1,5 +1,5 @@
-import Draw as d 
-import Rectangle as r
+from folder_2 import Draw as d 
+from folder_2 import Rectangle as r
 
 rect_height = 105
 rect_width = 125
@@ -55,6 +55,5 @@ def main(L, l):
     else:
         rectangles = rectangles_rot
 
-    d.draw_rectangle(rectangles, 0)
 
     return rectangles
