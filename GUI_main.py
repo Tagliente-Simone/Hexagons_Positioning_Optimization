@@ -77,23 +77,23 @@ class App:
 
         # Create input label and entry
         self.label = tk.Label(master, text="Inserisci il diametro del tubo in millimetri:")
-        self.label.pack()
+        self.label.place(x=10, y=0)
 
         self.diameter_entry = tk.Entry(master)
-        self.diameter_entry.pack()
+        self.diameter_entry.place(x=10, y=20)
 
         # Create button to calculate tube compositions
         self.calculate_button = tk.Button(master, text="Calcola composizioni", command=self.calculate_compositions)
-        self.calculate_button.pack()
+        self.calculate_button.place(x=10, y=50)
 
         # Create button to convert diameter to inches
         self.convert_button = tk.Button(master, text="Conversione pollici", command=self.convert_diameter)
-        self.convert_button.pack()
+        self.convert_button.place(x=160, y=50)
 
         # Create console log
         self.console_log = tk.Text(master)
         self.console_log.config(state="disabled")
-        self.console_log.pack()
+        self.console_log.place(x=0, y=80)
 
     def calculate_compositions(self):
         diameter = self.diameter_entry.get()
@@ -120,6 +120,8 @@ class App:
         else:
             messagebox.showerror("Errore", "Inserisci un valore numerico valido")
 
+
 root = tk.Tk()
+root.geometry("500x500")
 app = App(root)
 root.mainloop()

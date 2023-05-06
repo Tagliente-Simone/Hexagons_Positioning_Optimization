@@ -42,7 +42,14 @@ def hexagon_test(dest):
 
 def rectangle_test(dest):
 
-    rows = [(4, 5), (6, 7)]
+    if float(dest) >= 30 and float(dest)  <= 40:
+        rows = [(6, 7)]
+    elif float(dest)  > 40 and float(dest)  <= 55:
+        rows = [(4, 5), (6, 7)]
+    elif float(dest)  > 55:
+        rows = [(4, 5)]
+
+    rows = [(6, 7), (4, 5)]
 
     max_number = 0
     best_config = (0, 0)
@@ -69,7 +76,7 @@ while True:
         if diameter == "quit":
             sys.exit()
         elif diameter == "help":
-            print(colored("------------------------------------LISTA DEI COMANDI", "green"))
+            print(colored("------------------------------------LISTA DEI COMANDI", "blue"))
             print(colored("     -> 'help': mostra la lista dei comandi", "yellow"))
             print(colored("     -> 'quit': esce dal programma", "yellow"))
             print(colored("     -> 'conversion': converte il diametro da millimetri a pollici", "yellow"))
@@ -82,10 +89,10 @@ while True:
             else:
                 print(colored("Inserisci un valore numerico valido", "red"))
         elif checkfloat(diameter) and float(diameter) >= 30 and float(diameter) <= 90:
-            print(colored("------------------------------------COMPOSIZIONI CONSIGLIATE", "green"))
+            print(colored("------------------------------------COMPOSIZIONI CONSIGLIATE", "blue"))
             total_hexagon = hexagon_test(diameter)
             total_rectangle = rectangle_test(diameter)
-            print(colored("------------------------------------NUMERO TOTALE DI TUBI", "green"))
+            print(colored("------------------------------------NUMERO TOTALE DI TUBI", "blue"))
             print(colored(f"     -> Forma esagonale: {total_hexagon}", "yellow"))
             print(colored(f"     -> Forma rettangolare: {total_rectangle}", "yellow"))
         else:
