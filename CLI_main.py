@@ -20,7 +20,7 @@ def hexagon_test(dest):
     elif float(dest)  > 50 and float(dest)  <= 70:
         compo_list = ["4-5-6-5-4", "4-5-6-7-6-5-4", "3-4-5-4-3"]
     elif float(dest)  > 70:
-        compo_list = ["3-4-3"]
+        compo_list = ["3-4-3", "3-4-5-4-3"]
 
     for i in range(0, len(compo_list)):
         rows_array = [float(i) for i in compo_list[i].split('-')]
@@ -64,7 +64,7 @@ while quit:
     diameter = input()
     if diameter == "quit()":
         quit = False
-    elif checkfloat(diameter):
+    elif checkfloat(diameter) and float(diameter) >= 30 and float(diameter) <= 90:
         print("------------------------------------COMPOSIZIONI CONSIGLIATE")
         total_hexagon = hexagon_test(diameter)
         total_rectangle = rectangle_test(diameter)
@@ -72,7 +72,7 @@ while quit:
         print("     -> Forma esagonale: " + str(total_hexagon))
         print("     -> Forma rettangolare: " + str(total_rectangle))
     else:
-        print("Inserisci un diametro valido o digita 'quit()' per terminare")
+        print("Inserisci un diametro valido compreso tra 30mm e 90mm o digita 'quit()' per terminare")
 
 
 

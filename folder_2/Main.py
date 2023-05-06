@@ -55,5 +55,6 @@ def main(L, l):
     else:
         rectangles = rectangles_rot
 
-
+    d.draw_rectangles(rectangles)
+    
     return rectangles

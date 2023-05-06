@@ -197,12 +197,12 @@ def compute(hex_width, hex_height, hex_side, index):
     len_rotation = test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index)
 
     if(len_no_rotation > len_rotation):
-        #dr.draw_rectangle(hexagons_no_rot, hex_width, hex_height, hex_side, "rotation", index)
+        dr.draw_rectangle(hexagons_no_rot, hex_width, hex_height, hex_side, "rotation", index)
         return len_no_rotation
         
         
     else:
-        #dr.draw_rectangle(hexagons_rot, hex_width, hex_height, hex_side, "rotation", index)
+        dr.draw_rectangle(hexagons_rot, hex_width, hex_height, hex_side, "rotation", index)
         return len_rotation
 
 

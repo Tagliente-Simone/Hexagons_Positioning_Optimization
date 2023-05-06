@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib.patches import Polygon
 
-def draw_rectangle(rectangles, index):
+def draw_rectangles(rectangles):
     # Create a rectangle object with width=120 and height=100
     rect = Rectangle((0, 0), 125, 105)
 
