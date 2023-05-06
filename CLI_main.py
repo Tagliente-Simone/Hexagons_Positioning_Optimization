@@ -1,6 +1,13 @@
 from folder_1.CalculateDimension import Calculate as cd
 from folder_2.CalculateDimension import compute as cd2
 
+def checkfloat(string):
+    try:
+        float(string)
+        return True
+    except ValueError:
+        return False
+    
 
 def hexagon_test(dest):
     max_found = 0;
@@ -28,7 +35,7 @@ def hexagon_test(dest):
                 max_found = total_tubes_1
                 best_compo = compo_list[i]
 
-    print("best_compo: " + str(best_compo))
+    print("     -> Forma esagonale: " + str(best_compo))
     return max_found
 
 def rectangle_test(dest):
@@ -45,21 +52,27 @@ def rectangle_test(dest):
             max_number = total_tubes
             best_config = row
             
-    print("best_config: " + str(best_config))
+    print("     -> Forma rettangolare: " + str(best_config))
     return max_number
 
 
+quit = True
 
-    
-print("Enter the diameter of the tube: ")
-diameter = input()
-print("-----------------BEST CONFIGURATIONS-------------------")
-total_hexagon = hexagon_test(diameter)
-total_rectangle = rectangle_test(diameter)
-print("-----------------RESULTS-------------------")
-print("Total tubes in hexagon: " + str(total_hexagon))
-print("Total tubes in rectangle: " + str(total_rectangle))
-print("------------------------------------")
+while quit:
+    print("-----------------NUOVA SESSIONE-------------------------------------------------------------------")
+    print("Inserisci il diametro del tubo in millimetri: ")
+    diameter = input()
+    if diameter == "quit()":
+        quit = False
+    elif checkfloat(diameter):
+        print("------------------------------------COMPOSIZIONI CONSIGLIATE")
+        total_hexagon = hexagon_test(diameter)
+        total_rectangle = rectangle_test(diameter)
+        print("------------------------------------NUMERO TOTALE DI TUBI")
+        print("     -> Forma esagonale: " + str(total_hexagon))
+        print("     -> Forma rettangolare: " + str(total_rectangle))
+    else:
+        print("Inserisci un diametro valido o digita 'quit()' per terminare")
 
 
 
