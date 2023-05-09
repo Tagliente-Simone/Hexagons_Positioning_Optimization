@@ -88,7 +88,7 @@ class App:
 
         # Create button to convert diameter to inches
         self.convert_button = tk.Button(master, text="Conversione pollici", command=self.convert_diameter)
-        self.convert_button.place(x=160, y=50)
+        self.convert_button.place(x=180, y=50)
 
         # Create console log
         self.console_log = tk.Text(master)
@@ -122,6 +122,7 @@ class App:
 
 
 root = tk.Tk()
-root.geometry("500x500")
+root.geometry("568x400")
+root.resizable(False, False)
 app = App(root)
 root.mainloop()
