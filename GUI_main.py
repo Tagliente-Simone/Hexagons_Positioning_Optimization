@@ -42,8 +42,8 @@ class App:
                 if total_tubes_1 > max_found:
                     max_found = total_tubes_1
                     best_compo = compo_list[i]
-
-        log_msg = f"Composizioni consigliate per il tubo di diametro {dest}mm:\n"
+        log_msg = "**********************************************************************\n"
+        log_msg += f"Composizioni consigliate per il tubo di diametro {dest}mm:\n"
         log_msg += f"- Forma esagonale: {best_compo}\n"
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
@@ -64,8 +64,7 @@ class App:
             if total_tubes > max_number:
                 max_number = total_tubes
                 best_config = row
-        log_msg = f"Composizioni consigliate per il tubo di diametro {dest}mm:\n"
-        log_msg += f"- Forma rettangolare: {best_config}\n"
+        log_msg = f"- Forma rettangolare: {best_config}\n"
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")   
@@ -93,7 +92,8 @@ class App:
         # Create console log
         self.console_log = tk.Text(master)
         self.console_log.config(state="disabled")
-        self.console_log.place(x=0, y=80)
+        self.console_log.config(width=70, height=18)
+        self.console_log.place(x=0, y=83)
 
     def calculate_compositions(self):
         diameter = self.diameter_entry.get()
