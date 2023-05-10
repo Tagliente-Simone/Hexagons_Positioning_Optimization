@@ -197,18 +197,30 @@ def compute(hex_width, hex_height, hex_side, index):
     len_rotation = test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index)
 
     if(len_no_rotation > len_rotation):
-        dr.draw_rectangle(hexagons_no_rot, hex_width, hex_height, hex_side, "rotation", index)
+        dr.draw_rectangle(hexagons_no_rot, hex_width, hex_height, hex_side, "no", index)
+        save_on_csv(hexagons_no_rot, "no")
         return len_no_rotation
         
         
     else:
-        dr.draw_rectangle(hexagons_rot, hex_width, hex_height, hex_side, "rotation", index)
+        dr.draw_rectangle(hexagons_rot, hex_width, hex_height, hex_side, "si", index)
+        save_on_csv(hexagons_rot, "si")
         return len_rotation
 
 
 
 
+def save_on_csv(hexagons, rotation):
+    with open('hexagons.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile, delimiter=',')
+        writer.writerow(['x', 'y', 'rotazione'])
 
+        for hexagon in hexagons:
+            writer.writerow([hexagon.origin_x, hexagon.origin_y, rotation])
+        
+
+
+        
 
 
 

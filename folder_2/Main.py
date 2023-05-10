@@ -1,5 +1,6 @@
 from folder_2 import Draw as d 
 from folder_2 import Rectangle as r
+import csv
 
 rect_height = 105
 rect_width = 125
@@ -52,9 +53,21 @@ def main(L, l):
 
     if(len(rectangles_norot) > len(rectangles_rot)):
         rectangles = rectangles_norot
+        save_on_csv(rectangles, 'no')
+
     else:
         rectangles = rectangles_rot
+        save_on_csv(rectangles, 'yes')
 
     d.draw_rectangles(rectangles)
     
     return rectangles
+
+
+def save_on_csv(rectangles, rotation):
+    with open('rectangles.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile, delimiter=',')
+        writer.writerow(['x', 'y', 'rotazione'])
+
+        for rectangle in rectangles:
+            writer.writerow([rectangle.center_x, rectangle.center_y, rotation])
