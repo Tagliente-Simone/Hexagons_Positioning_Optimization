@@ -57,11 +57,13 @@ class App:
             
             total_rect = cd2(float(dest)/20, row[0], row[1], row[1], weight)
             single_rect = (row[1] * int((row[1] / 2)) + row[0] * (row[1] - int((row[1]) / 2)))
+            print("single rect: " + str(single_rect))
             total_tubes = total_rect * single_rect
             print("single weight: " + str(weight) + " weight rect: " + str(weight * single_rect) + " of config " + str(row))
             if total_tubes > max_number and single_rect * weight < 25:
                 max_number = total_tubes
                 best_config = row
+        print("best config", best_config)
         log_msg = f"- Forma rettangolare: {best_config} - Peso: {round((best_config[1] * int((best_config[1] / 2)) + best_config[0] * (best_config[1] - int((best_config[1]) / 2))) * weight, 2)} Kg\n"
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
