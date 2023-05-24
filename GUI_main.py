@@ -91,6 +91,27 @@ class App:
         console_log.config(state="disabled")   
         draw_rects(best_rect)
         return max_number
+    
+    def actual_hexagon_test(self, weight, dest, console_log, actual_compo):
+        rows_array = [float(i) for i in actual_compo.split('-')]
+        if(len(rows_array) % 2 == 1):
+                n_rows = len(rows_array)
+                radius = float(dest)
+                radius = radius / 20
+                #Call the function to calculate the dimension of the hexagon
+                hexagons = cd(radius, n_rows, rows_array, 9999)
+                total = len(hexagons)
+                single = sum([int(i) for i in actual_compo.split('-')])
+
+        log_msg = "######################################################################\n"
+        log_msg += f"Composizione attuale per il tubo di diametro {dest} mm:\n"
+        log_msg += f"- Forma esagonale: {actual_compo} - Peso: {round(sum([int(i) for i in actual_compo.split('-')]) * weight, 2)} Kg\n"
+        log_msg += f"- Numero di tubi: {single * total}\n"
+        console_log.config(state="normal")
+        console_log.insert(tk.END, log_msg)
+        console_log.config(state="disabled")
+        draw_hexs(hexagons)
+
 
     def __init__(self, master):
         self.master = master
@@ -123,8 +144,10 @@ class App:
     def calculate_compositions(self):
         diameters_string = self.diameter_entry.get()
         diameters_float = tuple(diameters_string.split(" "))
+        actual_compo = diameters_float[4]
         diameter = float(diameters_float[1])
         weight = float(diameters_float[3])
+        total_actual_hexagon = self.actual_hexagon_test(weight, diameter, self.console_log, actual_compo)
         total_hexagon = self.hexagon_test(weight, diameter, self.console_log)
         total_rectangle = self.rectangle_test(weight, diameter, self.console_log)
         if total_hexagon == -1 and total_rectangle == -1:
