@@ -37,10 +37,18 @@ class App:
                 total = len(hexagons)
                 single = sum([int(i) for i in compo_list[i].split('-')])
                 total_tubes_1 =  single * total
-                if total_tubes_1 > max_found and single * weight < 25:
-                    max_found = total_tubes_1
-                    best_compo = compo_list[i]
-                    best_hex = hexagons
+                if single * weight < 25:
+                    if total_tubes_1 > max_found:
+                        max_found = total_tubes_1
+                        best_compo = compo_list[i]
+                        best_hex = hexagons
+                else:
+                    log_msg = f"Composizione {compo_list[i]} scartata per eccesso di peso\n"
+                    console_log.config(state="normal")
+                    console_log.insert(tk.END, log_msg)
+                    console_log.config(state="disabled")
+                    return -1
+
 
         log_msg = "**********************************************************************\n"
         log_msg += f"Composizioni consigliate per il tubo di diametro {dest} mm:\n"
@@ -65,10 +73,17 @@ class App:
             total_rect = len(rects)
             single_rect = (row[1] * int((row[1] / 2)) + row[0] * (row[1] - int((row[1]) / 2)))
             total_tubes = total_rect * single_rect
-            if total_tubes > max_number and single_rect * weight < 25:
-                max_number = total_tubes
-                best_config = row
-                best_rect = rects
+            if single_rect * weight < 25:
+                if total_tubes > max_number:
+                    max_number = total_tubes
+                    best_config = row
+                    best_rect = rects
+            else:
+                log_msg = f"Composizione {row} scartata per eccesso di peso\n"
+                console_log.config(state="normal")
+                console_log.insert(tk.END, log_msg)
+                console_log.config(state="disabled")
+                return -1
 
         log_msg = f"- Forma rettangolare: {best_config} - Peso: {round((best_config[1] * int((best_config[1] / 2)) + best_config[0] * (best_config[1] - int((best_config[1]) / 2))) * weight, 2)} Kg\n"
         console_log.config(state="normal")
@@ -112,6 +127,8 @@ class App:
         weight = float(diameters_float[3])
         total_hexagon = self.hexagon_test(weight, diameter, self.console_log)
         total_rectangle = self.rectangle_test(weight, diameter, self.console_log)
+        if total_hexagon == -1 and total_rectangle == -1:
+            return
         log_msg = f"Numero totale di tubi per il tubo di diametro {diameter} mm:\n"
         log_msg += f"- Forma esagonale: {total_hexagon}\n"
         log_msg += f"- Forma rettangolare: {total_rectangle}\n\n"
