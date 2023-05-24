@@ -6,6 +6,9 @@ from tkinter import ttk
 import pandas as pd
 from PIL import ImageTk, Image
 import math
+from folder_2.Draw import draw_rectangles as draw_rects
+from folder_1.Draw import draw_hexagons as draw_hexs
+
 
 
 class App:
@@ -30,19 +33,22 @@ class App:
                 radius = float(dest)
                 radius = radius / 20
                 #Call the function to calculate the dimension of the hexagon
-                total = cd(radius, n_rows, rows_array, 9999)
+                hexagons = cd(radius, n_rows, rows_array, 9999)
+                total = len(hexagons)
                 single = sum([int(i) for i in compo_list[i].split('-')])
                 total_tubes_1 =  single * total
-                print("single weight: " + str(weight) + " weight hex: " + str(weight * single) + " of config " + compo_list[i])
                 if total_tubes_1 > max_found and single * weight < 25:
                     max_found = total_tubes_1
                     best_compo = compo_list[i]
+                    best_hex = hexagons
+
         log_msg = "**********************************************************************\n"
         log_msg += f"Composizioni consigliate per il tubo di diametro {dest} mm:\n"
         log_msg += f"- Forma esagonale: {best_compo} - Peso: {round(sum([int(i) for i in best_compo.split('-')]) * weight, 2)} Kg\n"
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")
+        draw_hexs(best_hex)
 
         return max_found
 
@@ -55,19 +61,20 @@ class App:
 
         for row in rows:
             
-            total_rect = cd2(float(dest)/20, row[0], row[1], row[1], weight)
+            rects = cd2(float(dest)/20, row[0], row[1], row[1], weight)
+            total_rect = len(rects)
             single_rect = (row[1] * int((row[1] / 2)) + row[0] * (row[1] - int((row[1]) / 2)))
-            print("single rect: " + str(single_rect))
             total_tubes = total_rect * single_rect
-            print("single weight: " + str(weight) + " weight rect: " + str(weight * single_rect) + " of config " + str(row))
             if total_tubes > max_number and single_rect * weight < 25:
                 max_number = total_tubes
                 best_config = row
-        print("best config", best_config)
+                best_rect = rects
+
         log_msg = f"- Forma rettangolare: {best_config} - Peso: {round((best_config[1] * int((best_config[1] / 2)) + best_config[0] * (best_config[1] - int((best_config[1]) / 2))) * weight, 2)} Kg\n"
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")   
+        draw_rects(best_rect)
         return max_number
 
     def __init__(self, master):

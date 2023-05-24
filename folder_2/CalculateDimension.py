@@ -38,7 +38,7 @@ def calculate_rectangle_dimensions(radius, short_side, long_side, rows, weight):
         raise ValueError("Invalid ratio")
 
     frame = m.main(frame_width, tube_length)
-    return len(frame)
+    return frame
     ##single_frame = (long_side * (int(int(rows) / 2)) + short_side * (int(rows) - int(int(rows) / 2)))
     ##print("single weight: " + str(weight) + " weight rect: " + str(weight * single_frame) + " of config " + str(rows) + "-" + str(rows-1))
 

@@ -32,6 +32,6 @@ def calculate_hexagon_dimensions(radius, n_rows, rows_array, index):
     b_max = b_min * k
 
     # Compute the total number of tubes in the hexagon
-    total_tubes = m.compute(B_max, h_max * 2, b_max, index)
-
-    return total_tubes
+    frame = m.compute(B_max, h_max * 2, b_max, index)
+          
+    return frame

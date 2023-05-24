@@ -98,7 +98,6 @@ def test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side, index):
     ## Draw the hexagons to see the result
     len_no_rotation = len(hexagons_no_rot)
     centering_no_rotation(hexagons_no_rot, highest_y, hex_width, hex_height, hex_side)
-    dr.draw_rectangle(hexagons_no_rot, hex_width, hex_height, hex_side, "no_rotation", index)
     return len_no_rotation
     
 def test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index):
@@ -144,8 +143,6 @@ def test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index):
     ## Draw the hexagons to see the result
     len_rotation = len(hexagons_rot)
     centering_rotation(hexagons_rot, highest_x, hex_width, hex_height, hex_side)
-
-    dr.draw_rectangle(hexagons_rot, hex_width, hex_height, hex_side, "rotation", index)
 
     
 
@@ -193,19 +190,13 @@ def compute(hex_width, hex_height, hex_side, index):
     hexagons_no_rot = []
     hexagons_rot = []
 
-    len_no_rotation = test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side, index)
-    len_rotation = test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index)
+    test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side, index)
+    test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index)
 
-    if(len_no_rotation > len_rotation):
-        dr.draw_rectangle(hexagons_no_rot, hex_width, hex_height, hex_side, "no", index)
-        save_on_csv(hexagons_no_rot, "no")
-        return len_no_rotation
-        
-        
+    if(len(hexagons_no_rot) > len(hexagons_rot)):
+        return hexagons_no_rot
     else:
-        dr.draw_rectangle(hexagons_rot, hex_width, hex_height, hex_side, "si", index)
-        save_on_csv(hexagons_rot, "si")
-        return len_rotation
+        return hexagons_rot
 
 
 

@@ -41,7 +41,6 @@ def place_rect(L, l):
     slack_x = rect_width - last_origin[0] - L/2
 
     for rectangle in rectangles:
-        print("slack", slack_x/2, slack_y/2)
         rectangle.update_points(slack_x/2, slack_y/2)
 
 
@@ -65,13 +64,9 @@ def main(L, l):
 
     if(len(rectangles_norot) > len(rectangles_rot)):
         rectangles = rectangles_norot
-        save_on_csv(rectangles, 'no')
     else:
         rectangles = rectangles_rot
-        save_on_csv(rectangles, 'yes')
-
-    d.draw_rectangles(rectangles)
-
+    
     return rectangles
 
 
@@ -86,7 +81,7 @@ def save_on_csv(rectangles, rotation):
     Returns:
     None
     """
-    with open('rectangles.csv', 'w', newline='') as csvfile:
+    with open('rectangles' + str(len(rectangles)) +'.csv', 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
         writer.writerow(['x', 'y', 'rotazione'])
 

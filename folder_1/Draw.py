@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib.patches import Polygon
 
-def draw_rectangle(hexagons, hex_width, hex_height, hex_side, rotation, index):
+def draw_hexagons(hexagons):
     # Create a rectangle object with width=120 and height=100
     rect = Rectangle((0, 0), 125, 105)
 
@@ -32,8 +32,7 @@ def draw_rectangle(hexagons, hex_width, hex_height, hex_side, rotation, index):
 
     # Display the plot
     #plt.show()
-    if (index == 9999):
-        plt.savefig("./folder_1/images/hex.png", dpi=300)
+    plt.savefig("./folder_1/images/hex.png", dpi=300)
     ##plt.savefig("./images/" + str(index) + 'hexagon' + str(hex_width) + str(hex_height) + str(hex_side) + rotation + '.png', dpi=300)
 
     plt.close()
