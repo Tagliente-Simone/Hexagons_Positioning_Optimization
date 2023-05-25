@@ -110,7 +110,7 @@ class App:
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")
-        draw_hexs(hexagons)
+        return single*total
 
 
     def __init__(self, master):
@@ -142,6 +142,9 @@ class App:
         self.console_log.place(x=0, y=100)
 
     def calculate_compositions(self):
+        self.console_log.config(state="normal")
+        self.console_log.delete('1.0', tk.END)
+        self.console_log.config(state="disabled")
         diameters_string = self.diameter_entry.get()
         diameters_float = tuple(diameters_string.split(" "))
         actual_compo = diameters_float[4]
@@ -150,15 +153,21 @@ class App:
         total_actual_hexagon = self.actual_hexagon_test(weight, diameter, self.console_log, actual_compo)
         total_hexagon = self.hexagon_test(weight, diameter, self.console_log)
         total_rectangle = self.rectangle_test(weight, diameter, self.console_log)
-        if total_hexagon == -1 and total_rectangle == -1:
-            return
         log_msg = f"Numero totale di tubi per il tubo di diametro {diameter} mm:\n"
-        log_msg += f"- Forma esagonale: {total_hexagon}\n"
-        log_msg += f"- Forma rettangolare: {total_rectangle}\n\n"
+        log_msg += f"- Forma esagonale: {total_hexagon}"
+        if total_actual_hexagon <= total_hexagon:
+            log_msg += f" - Incremento del {round(((total_hexagon - total_actual_hexagon) / total_actual_hexagon) * 100, 2)}%\n"
+        else:
+            log_msg += "\n"
+        log_msg += f"- Forma rettangolare: {total_rectangle}"
+        if total_actual_hexagon <= total_rectangle:
+            log_msg += f" - Incremento del {round(((total_rectangle - total_actual_hexagon) / total_actual_hexagon) * 100, 2)}%\n"
+        else:
+            log_msg += "\n"
         self.console_log.config(state="normal")
         self.console_log.insert(tk.END, log_msg)
         self.console_log.config(state="disabled")
-        self.show_images("folder_1/images/hex.png", "folder_2/images/rect.png")
+        #self.show_images("folder_1/images/hex.png", "folder_2/images/rect.png")
 
     def read_diameters_from_file(self):
             
