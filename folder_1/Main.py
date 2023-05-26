@@ -201,13 +201,7 @@ def compute(hex_width, hex_height, hex_side, index):
 
 
 
-def save_on_csv(hexagons, rotation):
-    with open('hexagons.csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',')
-        writer.writerow(['x', 'y', 'rotazione'])
 
-        for hexagon in hexagons:
-            writer.writerow([hexagon.origin_x, hexagon.origin_y, rotation])
         
 
 

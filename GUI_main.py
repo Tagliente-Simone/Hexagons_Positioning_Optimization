@@ -8,7 +8,7 @@ from PIL import ImageTk, Image
 import math
 from folder_2.Draw import draw_rectangles as draw_rects
 from folder_1.Draw import draw_hexagons as draw_hexs
-
+import csv
 
 
 class App:
@@ -56,9 +56,19 @@ class App:
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")
+        self.save_on_csv_hex(best_hex)
         draw_hexs(best_hex)
 
         return max_found
+    
+    
+    def save_on_csv_hex(self, hexagons):
+        with open('coordinate_esagoni.csv', 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile, delimiter=',')
+            writer.writerow(['x', 'y'])
+
+            for hexagon in hexagons:
+                writer.writerow([round(hexagon.origin_x, 2), round(hexagon.origin_y, 2)])
 
     def rectangle_test(self, weight, dest, console_log):
 
@@ -89,8 +99,27 @@ class App:
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")   
+        self.save_on_csv_rect(best_rect)
         draw_rects(best_rect)
         return max_number
+    
+    def save_on_csv_rect(self, rectangles):
+        """
+        Save the center coordinates and rotation information of the given rectangles in a CSV file.
+
+        Args:
+        rectangles (list): List of Rectangle objects to be saved in a CSV file.
+        rotation (str): String specifying if the rectangles have been rotated or not.
+
+        Returns:
+        None
+        """
+        with open('coordinate_rettangoli.csv', 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile, delimiter=',')
+            writer.writerow(['x', 'y'])
+
+            for rectangle in rectangles:
+                writer.writerow([round(rectangle.center_x, 2), round(rectangle.center_y, 2)])
     
     def actual_hexagon_test(self, weight, dest, console_log, actual_compo):
         rows_array = [float(i) for i in actual_compo.split('-')]
@@ -167,7 +196,7 @@ class App:
         self.console_log.config(state="normal")
         self.console_log.insert(tk.END, log_msg)
         self.console_log.config(state="disabled")
-        #self.show_images("folder_1/images/hex.png", "folder_2/images/rect.png")
+        self.show_images("folder_1/images/hex.png", "folder_2/images/rect.png")
 
     def read_diameters_from_file(self):
             

@@ -70,20 +70,3 @@ def main(L, l):
     return rectangles
 
 
-def save_on_csv(rectangles, rotation):
-    """
-    Save the center coordinates and rotation information of the given rectangles in a CSV file.
-
-    Args:
-    rectangles (list): List of Rectangle objects to be saved in a CSV file.
-    rotation (str): String specifying if the rectangles have been rotated or not.
-
-    Returns:
-    None
-    """
-    with open('rectangles' + str(len(rectangles)) +'.csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',')
-        writer.writerow(['x', 'y', 'rotazione'])
-
-        for rectangle in rectangles:
-            writer.writerow([rectangle.center_x, rectangle.center_y, rotation])
