@@ -1,8 +1,18 @@
 from folder_1 import Hexagon as hx
+from folder_1 import RotatedHexagon as rhx
 from folder_1 import Draw as dr
 import csv
 import math
 ## This function places the vertical line of hexagons
+
+
+## Variables for the rectangle
+rect_width = 125
+rect_height = 105
+
+## Variables for the hexagons
+len_no_rotation = 0
+len_rotation = 0
 
 def place_vertical_hexagon(hexagons_no_rot, origin_x, origin_y, hex_width, hex_height, hex_side):
     
@@ -28,31 +38,26 @@ def place_vertical_hexagon(hexagons_no_rot, origin_x, origin_y, hex_width, hex_h
 
 def place_vertical_hexagon_rotated(hexagons_rot, origin_x, origin_y, hex_width, hex_height, hex_side):
 
-    last_origin_y = 0
+    last_origin_x = 0
 
     while True:
-        hexagon = hx.Hexagon(origin_x, origin_y, hex_width, hex_height, hex_side)
-        hexagon.rotate90()
+        hexagon = rhx.RotatedHexagon(origin_x, origin_y, hex_width, hex_height, hex_side)
+        #hexagon = hx.Hexagon(origin_x, origin_y, hex_width, hex_height, hex_side)
+        #hexagon.rotate90()
         hexagons_rot.append(hexagon)
 
-        if origin_y > last_origin_y:
-            last_origin_y = origin_y
+        if origin_x > last_origin_x:
+            last_origin_x = origin_x
         
-        origin_y += hex_height + 0.3
+        origin_x += hex_height + 0.3
 
         ## Check if the hexagon is out of the rectangle
-        if origin_y + hex_height/2 > rect_width:
+        if origin_x + hex_height/2 > rect_width:
             break
 
-    return last_origin_y
+    return last_origin_x
 
-## Variables for the rectangle
-rect_width = 125
-rect_height = 105
 
-## Variables for the hexagons
-len_no_rotation = 0
-len_rotation = 0
 
 
 
@@ -98,13 +103,14 @@ def test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side, index):
     ## Draw the hexagons to see the result
     len_no_rotation = len(hexagons_no_rot)
     centering_no_rotation(hexagons_no_rot, highest_y, hex_width, hex_height, hex_side)
+
     return len_no_rotation
     
 def test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index):
 
     ## Variables for the origin of the first hexagon
-    start_origin_x = hex_width/2
-    start_origin_y = hex_height/2
+    start_origin_x = hex_height/2
+    start_origin_y = hex_width/2
 
     origin_x = start_origin_x
     origin_y = start_origin_y
@@ -113,30 +119,32 @@ def test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index):
     line_index = 1
 
     highest_x = 0
-
+    
     while True:
 
-    
         ## Check if the line is out of the rectangle
-        if origin_x + hex_width/2 > rect_height:
+        if origin_y + hex_width/2 > rect_height:
             break
-        
+ 
         ## Start placing the hexagons
         last_origin_x = place_vertical_hexagon_rotated(hexagons_rot, origin_x, origin_y, hex_width, hex_height, hex_side)
-
+        
         if last_origin_x > highest_x:
             highest_x = last_origin_x
 
-    ## Update the position of the first hexagon of the new line
+        ## Update the position of the first hexagon of the new line
         if line_index % 2 == 1:
-            origin_x += hex_width - (hex_width - hex_side)/2  + 0.3/(math.sin(math.atan((hex_height) / ((hex_width - hex_side)))))
-            origin_y = start_origin_y + hex_height/2 + 0.3/2
+            origin_y += hex_width - (hex_width - hex_side)/2 + 0.3/(math.sin(math.atan((hex_height) / ((hex_width - hex_side)))))
+            origin_x = start_origin_x + hex_height/2 + 0.3/2
 
         else:
-            origin_x += hex_width - (hex_width - hex_side)/2  + 0.3
-            origin_y = start_origin_y
+            origin_y += hex_width - (hex_width - hex_side)/2  + 0.3
+            origin_x = start_origin_x
+
 
         line_index += 1
+
+
 
         
 
@@ -151,8 +159,8 @@ def test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index):
 def centering_no_rotation(hexagons_no_rot, highest_y, hex_width, hex_height, hex_side):
     
     last_origin_x = hexagons_no_rot[-1].origin_x
-    extreme_point_x = last_origin_x + hex_width/2
 
+    extreme_point_x = last_origin_x + hex_width/2
     extreme_point_y = highest_y + hex_height/2
 
 
@@ -168,10 +176,11 @@ def centering_no_rotation(hexagons_no_rot, highest_y, hex_width, hex_height, hex
 
 def centering_rotation(hexagons_rot, highest_x, hex_width, hex_height, hex_side):
 
-    last_origin_x = hexagons_rot[-1].origin_x
-    extreme_point_y = last_origin_x + hex_width/2
+    last_origin_y = hexagons_rot[-1].origin_y
+    
+    extreme_point_y = last_origin_y + hex_width/2
     extreme_point_x = highest_x + hex_height/2
-
+    
     ## Calculate the distance between the extreme point and the border of the rectangle
 
     distance_y = rect_height - extreme_point_y
@@ -192,6 +201,10 @@ def compute(hex_width, hex_height, hex_side, index):
 
     test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side, index)
     test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index)
+    #dr.draw_hexagons(hexagons_no_rot)
+    #dr.draw_hexagons(hexagons_rot)
+
+
 
     if(len(hexagons_no_rot) > len(hexagons_rot)):
         return hexagons_no_rot

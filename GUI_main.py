@@ -13,7 +13,7 @@ import csv
 
 class App:
 
-    def hexagon_test(self, weight, dest, console_log):
+    def hexagon_test(self, weight, dest, console_log, total_actual_hexagon):
         max_found = 0;
         best_compo = ""
 
@@ -24,7 +24,7 @@ class App:
         elif float(dest)  > 50 and float(dest)  <= 70:
             compo_list = ["4-5-6-5-4", "4-5-6-7-6-5-4", "3-4-5-4-3"]
         elif float(dest)  > 70:
-            compo_list = ["3-4-3", "3-4-5-4-3"]
+            compo_list = ["3-4-3"]
 
         for i in range(0, len(compo_list)):
             rows_array = [float(i) for i in compo_list[i].split('-')]
@@ -43,7 +43,7 @@ class App:
                         best_compo = compo_list[i]
                         best_hex = hexagons
                 else:
-                    log_msg = f"Composizione {compo_list[i]} scartata per eccesso di peso\n"
+                    log_msg = f"ERRORE: Composizione {compo_list[i]} scartata per eccesso di peso\n"
                     console_log.config(state="normal")
                     console_log.insert(tk.END, log_msg)
                     console_log.config(state="disabled")
@@ -52,7 +52,8 @@ class App:
 
         log_msg = "**********************************************************************\n"
         log_msg += f"Composizioni consigliate per il tubo di diametro {dest} mm:\n"
-        log_msg += f"- Forma esagonale: {best_compo} - Peso: {round(sum([int(i) for i in best_compo.split('-')]) * weight, 2)} Kg\n"
+        log_msg += f"\n- Forma esagonale: {best_compo} - Peso: {round(sum([int(i) for i in best_compo.split('-')]) * weight, 2)} Kg - Tubi totali: {max_found}\n"
+        log_msg += f" -----> Percentuale incremento numero di tubi: {round((max_found - total_actual_hexagon) / total_actual_hexagon * 100, 2)}%\n"
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")
@@ -70,12 +71,13 @@ class App:
             for hexagon in hexagons:
                 writer.writerow([round(hexagon.origin_x, 2), round(hexagon.origin_y, 2)])
 
-    def rectangle_test(self, weight, dest, console_log):
+    def rectangle_test(self, weight, dest, console_log, total_actual_hexagon):
 
         rows = [(4, 5), (6, 7)]
-
+        log_msg = ""
         max_number = 0
         best_config = (0, 0)
+        best_rect = []
 
         for row in rows:
             
@@ -83,19 +85,20 @@ class App:
             total_rect = len(rects)
             single_rect = (row[1] * int((row[1] / 2)) + row[0] * (row[1] - int((row[1]) / 2)))
             total_tubes = total_rect * single_rect
+            log_msg += f"\n- Forma rettangolare: {row} - Peso: {round((row[1] * int((row[1] / 2)) + row[0] * (row[1] - int((row[1]) / 2))) * weight, 2)} Kg - Tubi totali: {total_tubes}\n"
+            log_msg += f" -----> Percentuale incremento numero di tubi: {round((total_tubes - total_actual_hexagon) / total_actual_hexagon * 100, 2)}%\n"
             if single_rect * weight < 25:
                 if total_tubes > max_number:
                     max_number = total_tubes
                     best_config = row
                     best_rect = rects
             else:
-                log_msg = f"Composizione {row} scartata per eccesso di peso\n"
+                log_msg += f"ERRORE: Composizione {row} scartata per eccesso di peso\n"
                 console_log.config(state="normal")
                 console_log.insert(tk.END, log_msg)
                 console_log.config(state="disabled")
-                return -1
 
-        log_msg = f"- Forma rettangolare: {best_config} - Peso: {round((best_config[1] * int((best_config[1] / 2)) + best_config[0] * (best_config[1] - int((best_config[1]) / 2))) * weight, 2)} Kg\n"
+        #log_msg = f"- Forma rettangolare: {best_config} - Peso: {round((best_config[1] * int((best_config[1] / 2)) + best_config[0] * (best_config[1] - int((best_config[1]) / 2))) * weight, 2)} Kg - Tubi totali: {max_number}\n"
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")   
@@ -132,9 +135,9 @@ class App:
                 total = len(hexagons)
                 single = sum([int(i) for i in actual_compo.split('-')])
 
-        log_msg = "######################################################################\n"
+        log_msg = "**********************************************************************\n"
         log_msg += f"Composizione attuale per il tubo di diametro {dest} mm:\n"
-        log_msg += f"- Forma esagonale: {actual_compo} - Peso: {round(sum([int(i) for i in actual_compo.split('-')]) * weight, 2)} Kg\n"
+        log_msg += f"\n- Forma esagonale: {actual_compo} - Peso: {round(sum([int(i) for i in actual_compo.split('-')]) * weight, 2)} Kg\n"
         log_msg += f"- Numero di tubi: {single * total}\n"
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
@@ -180,22 +183,8 @@ class App:
         diameter = float(diameters_float[1])
         weight = float(diameters_float[3])
         total_actual_hexagon = self.actual_hexagon_test(weight, diameter, self.console_log, actual_compo)
-        total_hexagon = self.hexagon_test(weight, diameter, self.console_log)
-        total_rectangle = self.rectangle_test(weight, diameter, self.console_log)
-        log_msg = f"Numero totale di tubi per il tubo di diametro {diameter} mm:\n"
-        log_msg += f"- Forma esagonale: {total_hexagon}"
-        if total_actual_hexagon <= total_hexagon:
-            log_msg += f" - Incremento del {round(((total_hexagon - total_actual_hexagon) / total_actual_hexagon) * 100, 2)}%\n"
-        else:
-            log_msg += "\n"
-        log_msg += f"- Forma rettangolare: {total_rectangle}"
-        if total_actual_hexagon <= total_rectangle:
-            log_msg += f" - Incremento del {round(((total_rectangle - total_actual_hexagon) / total_actual_hexagon) * 100, 2)}%\n"
-        else:
-            log_msg += "\n"
-        self.console_log.config(state="normal")
-        self.console_log.insert(tk.END, log_msg)
-        self.console_log.config(state="disabled")
+        total_hexagon = self.hexagon_test(weight, diameter, self.console_log, total_actual_hexagon)
+        total_rectangle = self.rectangle_test(weight, diameter, self.console_log, total_actual_hexagon)
         self.show_images("folder_1/images/hex.png", "folder_2/images/rect.png")
 
     def read_diameters_from_file(self):

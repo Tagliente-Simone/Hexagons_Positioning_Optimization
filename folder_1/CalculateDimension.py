@@ -18,6 +18,8 @@ def calculate_hexagon_dimensions(radius, n_rows, rows_array, index):
         None.
 
     """
+    
+    
     # Calculate the minimum width of the hexagon
     B_min = 2 * radius * (max(rows_array) - 1)
     b_min = 2 * radius * (min(rows_array) - 1)
@@ -32,6 +34,13 @@ def calculate_hexagon_dimensions(radius, n_rows, rows_array, index):
     b_max = b_min * k
 
     # Compute the total number of tubes in the hexagon
+
+
+    if len(rows_array) == 3:
+
+        frame = m.compute(radius * 8.32, radius * 5.472, radius * 5.161, index)
+        return frame
+
     frame = m.compute(B_max, h_max * 2, b_max, index)
           
     return frame
