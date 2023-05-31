@@ -35,6 +35,22 @@ def calculate_hexagon_dimensions(radius, n_rows, rows_array, index):
 
     # Compute the total number of tubes in the hexagon
 
+    # 3-4-3 B_max = 8.32, h_max = 5.472, b_max = 5.161
+    # 6-7-8-9-8-7-6 B_max = 18.312 h_max = 12.392, b_max = 11.156
+    # 4-5-6-5-4 B_max = 12.312, h_max = 8.93, b_max = 7.156
+    # 5-6-7-8-7-6-5 B_max = 16.314, h_max = 12.394, b_max = 9.158
+
+    if len(rows_array) == 7:
+        if rows_array[0] == 5:
+            frame = m.compute(radius * 16.314, radius * 12.394, radius * 9.158, index)
+            return frame
+        else:
+            frame = m.compute(radius * 18.312, radius * 12.392, radius * 11.156, index)
+            return frame
+        
+    if len(rows_array) == 5:
+        frame = m.compute(radius * 12.312, radius * 8.93, radius * 7.156, index)
+        return frame
 
     if len(rows_array) == 3:
 

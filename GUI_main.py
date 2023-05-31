@@ -22,7 +22,7 @@ class App:
         elif float(dest)  > 40 and float(dest)  <= 50:
             compo_list = ["6-7-8-9-8-7-6", "5-6-7-8-7-6-5", "4-5-6-5-4"]
         elif float(dest)  > 50 and float(dest)  <= 70:
-            compo_list = ["4-5-6-5-4", "4-5-6-7-6-5-4", "3-4-5-4-3"]
+            compo_list = ["4-5-6-5-4"]
         elif float(dest)  > 70:
             compo_list = ["3-4-3"]
 
@@ -161,7 +161,11 @@ class App:
 
         # Create button to calculate tube compositions
         self.calculate_button = tk.Button(master, text="Ottimizza", command=self.calculate_compositions)
-        self.calculate_button.place(x=10, y=70)
+        self.calculate_button.place(x=10, y=80)
+
+        # Create button to calculate tube compositions
+        self.calculate_button = tk.Button(master, text="Mostra Immagini", command=self.show_images_function)
+        self.calculate_button.place(x=130, y=80)
 
         # Label Text
         self.label_text = tk.Label(master, text="d_int\td_est\tlunghezza\tpeso_uni")
@@ -171,7 +175,7 @@ class App:
         self.console_log = tk.Text(master)
         self.console_log.config(state="disabled")
         self.console_log.config(width=70, height=18)
-        self.console_log.place(x=0, y=100)
+        self.console_log.place(x=0, y=130)
 
     def calculate_compositions(self):
         self.console_log.config(state="normal")
@@ -185,6 +189,8 @@ class App:
         total_actual_hexagon = self.actual_hexagon_test(weight, diameter, self.console_log, actual_compo)
         total_hexagon = self.hexagon_test(weight, diameter, self.console_log, total_actual_hexagon)
         total_rectangle = self.rectangle_test(weight, diameter, self.console_log, total_actual_hexagon)
+
+    def show_images_function(self):
         self.show_images("folder_1/images/hex.png", "folder_2/images/rect.png")
 
     def read_diameters_from_file(self):
