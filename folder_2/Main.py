@@ -39,6 +39,7 @@ def place_rect(L, l):
 
     slack_y = rect_height - last_origin[1] - l/2
     slack_x = rect_width - last_origin[0] - L/2
+    
 
     for rectangle in rectangles:
         rectangle.update_points(slack_x/2, slack_y/2)

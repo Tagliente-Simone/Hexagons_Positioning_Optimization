@@ -30,22 +30,6 @@ class Hexagon:
                       (self.origin_x - self.vertical_side_length/2, self.origin_y + self.hex_height/2)
                       ]
 
-    ## Rotate the hexagon 90 degrees
-    def rotate90(self):
-        """
-        Rotates the hexagon 90 degrees clockwise.
-
-        Returns:
-        None.
-        """
-        self.verts = [(self.origin_y, self.origin_x - self.hex_width/2),
-                      (self.origin_y + self.hex_height/2, self.origin_x - self.vertical_side_length/2),
-                      (self.origin_y + self.hex_height/2, self.origin_x + self.vertical_side_length/2),
-                      (self.origin_y, self.origin_x + self.hex_width/2),
-                      (self.origin_y - self.hex_height/2, self.origin_x + self.vertical_side_length/2),
-                      (self.origin_y - self.hex_height/2, self.origin_x - self.vertical_side_length/2)
-                     ]
-
     ## Traslate the hexagon by a given slack
     def update_points(self, slack_x, slack_y):
         """

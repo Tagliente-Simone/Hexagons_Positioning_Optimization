@@ -36,6 +36,7 @@ def calculate_rectangle_dimensions(radius, short_side, long_side, rows, weight):
 
     if ratio < 1.12 or ratio > 1.14:
         raise ValueError("Invalid ratio")
+    
 
     frame = m.main(frame_width, tube_length)
     return frame

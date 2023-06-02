@@ -39,10 +39,11 @@ class Rectangle:
             slack_x (float): The amount of slack to add to the x coordinates of the vertices.
             slack_y (float): The amount of slack to add to the y coordinates of the vertices.
         """
+        self.center_x += slack_x
+        self.center_y += slack_y
         for i in range(len(self.verts)):
             self.verts[i] = (self.verts[i][0] + slack_x, self.verts[i][1] + slack_y)
-            self.center_x += slack_x
-            self.center_y += slack_y
+
             
 
     def rotate90(self):

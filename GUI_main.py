@@ -69,14 +69,13 @@ class App:
             writer.writerow(['x', 'y'])
 
             for hexagon in hexagons:
-                writer.writerow([round(hexagon.origin_x, 2), round(hexagon.origin_y, 2)])
+                writer.writerow([round(hexagon.origin_x - 2.5, 2), round(hexagon.origin_y - 2.5, 2)])
 
     def rectangle_test(self, weight, dest, console_log, total_actual_hexagon):
 
         rows = [(4, 5), (6, 7)]
         log_msg = ""
         max_number = 0
-        best_config = (0, 0)
         best_rect = []
 
         for row in rows:
@@ -90,18 +89,18 @@ class App:
             if single_rect * weight < 25:
                 if total_tubes > max_number:
                     max_number = total_tubes
-                    best_config = row
                     best_rect = rects
             else:
                 log_msg += f"ERRORE: Composizione {row} scartata per eccesso di peso\n"
                 console_log.config(state="normal")
                 console_log.insert(tk.END, log_msg)
                 console_log.config(state="disabled")
+                continue
 
         #log_msg = f"- Forma rettangolare: {best_config} - Peso: {round((best_config[1] * int((best_config[1] / 2)) + best_config[0] * (best_config[1] - int((best_config[1]) / 2))) * weight, 2)} Kg - Tubi totali: {max_number}\n"
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
-        console_log.config(state="disabled")   
+        console_log.config(state="disabled")  
         self.save_on_csv_rect(best_rect)
         draw_rects(best_rect)
         return max_number
