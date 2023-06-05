@@ -1,11 +1,13 @@
 from folder_1.CalculateDimension import calculate_hexagon_dimensions as cd
 from folder_2.CalculateDimension import calculate_rectangle_dimensions as cd2
+from folder_3.CalculateDimension import calculate_trapeze_dimensions as cd3
 import tkinter as tk
 from tkinter import ttk
 import pandas as pd
 from PIL import ImageTk, Image
 from folder_2.Draw import draw_rectangles as draw_rects
 from folder_1.Draw import draw_hexagons as draw_hexs
+from folder_3.Draw import draw_trapezes as draw_traps
 import csv
 
 
@@ -66,7 +68,7 @@ class App:
             writer.writerow(['x', 'y'])
 
             for hexagon in hexagons:
-                writer.writerow([round(hexagon.origin_x - 2.5, 2), round(hexagon.origin_y - 2.5, 2)])
+                writer.writerow([round(hexagon.origin_x - 2, 2), round(hexagon.origin_y - 2, 2)])
 
     def rectangle_test(self, weight, dest, console_log, total_actual_hexagon):
 
@@ -118,7 +120,7 @@ class App:
             writer.writerow(['x', 'y'])
 
             for rectangle in rectangles:
-                writer.writerow([round(rectangle.center_x, 2), round(rectangle.center_y, 2)])
+                writer.writerow([round(rectangle.center_x - 2, 2), round(rectangle.center_y - 2, 2)])
     
     def actual_hexagon_test(self, weight, dest, console_log, actual_compo):
         rows_array = [float(i) for i in actual_compo.split('-')]
@@ -141,6 +143,14 @@ class App:
         draw_hexs(hexagons, True)
         self.save_on_csv_hex(hexagons, "_attuale")
         return single*total
+    
+    def trapezoid_test(self, weight, dest, console_log, total_actual_hexagon):
+        
+        trapezes = cd3(float(dest)/20)
+        
+        print(len(trapezes))
+        
+        draw_traps(trapezes)
 
     def __init__(self, master):
         self.master = master
@@ -187,6 +197,7 @@ class App:
         total_actual_hexagon = self.actual_hexagon_test(weight, diameter, self.console_log, actual_compo)
         self.hexagon_test(weight, diameter, self.console_log, total_actual_hexagon)
         self.rectangle_test(weight, diameter, self.console_log, total_actual_hexagon)
+        self.trapezoid_test(weight, diameter, self.console_log, total_actual_hexagon)
 
     def show_images_function(self):
         self.show_images("images/hex.png", "images/rect.png", "images/hex_actual.png")

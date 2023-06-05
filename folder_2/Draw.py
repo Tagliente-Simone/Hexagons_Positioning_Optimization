@@ -5,7 +5,7 @@ import numpy as np
 
 def draw_rectangles(rectangles):
     # Create a rectangle object with width=120 and height=100
-    rect = Rectangle((0, 0), 125, 105, facecolor='blue', edgecolor='black', linewidth=2)
+    rect = Rectangle((0, 0), 124, 104, facecolor='blue', edgecolor='black', linewidth=2)
     
 
 
@@ -17,7 +17,7 @@ def draw_rectangles(rectangles):
 
     # Set the limits of the axes
 
-    rect_1 = Rectangle((2.5, 2.5), 120, 100, linewidth=1, facecolor='green')
+    rect_1 = Rectangle((2, 2), 120, 100, linewidth=1, facecolor='green')
 
     ax.add_patch(rect_1)
 

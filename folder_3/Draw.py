@@ -1,12 +1,11 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib.patches import Polygon
-import matplotlib.patches as patches
-import folder_1.Hexagon as hx
-import folder_1.RotatedHexagon as hxr
 import numpy as np
 
-def draw_hexagons(hexagons, isActual):
+
+def draw_trapezes(trapezes):
+    
     # Create a rectangle object with width=120 and height=100
     rect = Rectangle((0, 0), 124, 104, facecolor='blue', edgecolor='black', linewidth=2)
     
@@ -17,25 +16,24 @@ def draw_hexagons(hexagons, isActual):
     
     # Add the rectangle to the axes
     ax.add_patch(rect)
-    
+
+    # Set the limits of the axes
+
     rect_1 = Rectangle((2, 2), 120, 100, linewidth=1, facecolor='green')
 
     ax.add_patch(rect_1)
-
-
-
-
-
-
-    for hexagon in hexagons:
-        verts = hexagon.verts
-        hexagon_polygon = Polygon(verts, fill=True, facecolor='#D3D3D3', edgecolor='black', linewidth=0.5)
-        ax.add_patch(hexagon_polygon)
+    
+    for trapeze in trapezes:
+        verts = trapeze.verts
+        trapeze_polygon = Polygon(verts, fill=True, facecolor='#D3D3D3', edgecolor='black', linewidth=0.5)
+        ax.add_patch(trapeze_polygon)
         # Plotting the dot
-        plt.scatter(hexagon.origin_x, hexagon.origin_y, color='black', marker='x')
+        plt.scatter(trapeze.origin_x, trapeze.origin_y, color='black', marker='x')
         
         
-    # Set the limits of the axes
+
+            
+        
 
 
     ax.set_xlim(0, 125)
@@ -61,21 +59,18 @@ def draw_hexagons(hexagons, isActual):
     # Decrease the font size of y-axis labels
     axis.set_yticklabels(axis.get_yticklabels(), fontsize=5)
 
+
+    
     # Set the aspect ratio to 'equal'
     ax.set_aspect('equal')
-
-
+    
     
 
     #plt.axis('off')
-
     # Display the plot
     #plt.show()
-    if isActual:
-        plt.savefig("./images/hex_actual.png", dpi=300)
-    else:
-        plt.savefig("./images/hex.png", dpi=300)
+    #if (index == 9999):
+    plt.savefig("./images/trap.png", dpi=300)
     ##plt.savefig("./images/" + str(index) + 'hexagon' + str(hex_width) + str(hex_height) + str(hex_side) + rotation + '.png', dpi=300)
 
     plt.close()
-

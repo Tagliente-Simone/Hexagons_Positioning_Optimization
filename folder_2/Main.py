@@ -2,8 +2,8 @@ from folder_2 import Draw as d
 from folder_2 import Rectangle as r
 import csv
 
-rect_height = 105
-rect_width = 125
+rect_height = 104
+rect_width = 124
 
 
 def place_rect(L, l):
