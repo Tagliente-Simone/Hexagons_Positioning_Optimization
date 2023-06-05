@@ -48,9 +48,7 @@ def draw_hexagons(hexagons):
     new_xticks = np.arange(0, 125, step)
     new_yticks = np.arange(0, 105, step)
     
-    print(new_xticks)
-    print(new_yticks)
-    
+
     # Set the new tick positions
     axis.set_xticks(new_xticks)
     axis.set_yticks(new_yticks)

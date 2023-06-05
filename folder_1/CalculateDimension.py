@@ -49,6 +49,9 @@ def calculate_hexagon_dimensions(radius, n_rows, rows_array, index):
             return frame
         
     if len(rows_array) == 5:
+        print(radius*8.93)
+        print(radius*12.312)
+        print(radius*7.156)
         frame = m.compute(radius * 12.312, radius * 8.93, radius * 7.156, index)
         return frame
 
