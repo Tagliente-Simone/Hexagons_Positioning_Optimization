@@ -3,7 +3,7 @@ from matplotlib.patches import Rectangle
 from matplotlib.patches import Polygon
 import numpy as np
 
-def draw_hexagons(hexagons):
+def draw_hexagons(hexagons, isActual):
     # Create a rectangle object with width=120 and height=100
     rect = Rectangle((0, 0), 125, 105, facecolor='blue', edgecolor='black', linewidth=2)
     
@@ -69,7 +69,10 @@ def draw_hexagons(hexagons):
 
     # Display the plot
     #plt.show()
-    plt.savefig("./folder_1/images/hex.png", dpi=300)
+    if isActual:
+        plt.savefig("./images/hex_actual.png", dpi=300)
+    else:
+        plt.savefig("./images/hex.png", dpi=300)
     ##plt.savefig("./images/" + str(index) + 'hexagon' + str(hex_width) + str(hex_height) + str(hex_side) + rotation + '.png', dpi=300)
 
     plt.close()

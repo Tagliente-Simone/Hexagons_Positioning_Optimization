@@ -70,7 +70,7 @@ def draw_rectangles(rectangles):
     # Display the plot
     #plt.show()
     #if (index == 9999):
-    plt.savefig("./folder_2/images/rect.png", dpi=300)
+    plt.savefig("./images/rect.png", dpi=300)
     ##plt.savefig("./images/" + str(index) + 'hexagon' + str(hex_width) + str(hex_height) + str(hex_side) + rotation + '.png', dpi=300)
 
     plt.close()

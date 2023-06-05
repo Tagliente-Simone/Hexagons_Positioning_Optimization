@@ -56,7 +56,7 @@ class App:
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")
         self.save_on_csv_hex(best_hex)
-        draw_hexs(best_hex)
+        draw_hexs(best_hex, False)
 
         return max_found
     
@@ -138,6 +138,7 @@ class App:
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")
+        draw_hexs(hexagons, True)
         return single*total
 
     def __init__(self, master):
@@ -186,7 +187,7 @@ class App:
         self.rectangle_test(weight, diameter, self.console_log, total_actual_hexagon)
 
     def show_images_function(self):
-        self.show_images("folder_1/images/hex.png", "folder_2/images/rect.png")
+        self.show_images("images/hex.png", "images/rect.png", "images/hex_actual.png")
 
     def read_diameters_from_file(self):
             
@@ -207,23 +208,28 @@ class App:
         except ValueError:
             return False
         
-    def show_images(self, image_path_1, image_path_2, max_size=(960, 900)):
+    def show_images(self, image_path_1, image_path_2, image_path_3, max_size=(480, 400)):
         # Crea la finestra
         image_window = tk.Toplevel()
         
         # Carica le immagini e ridimensionale se necessario
         image_1 = Image.open(image_path_1)
         image_2 = Image.open(image_path_2)
+        image_3 = Image.open(image_path_3)
         image_1.thumbnail(max_size, Image.LANCZOS)
         image_2.thumbnail(max_size, Image.LANCZOS)
+        image_3.thumbnail(max_size, Image.LANCZOS)
         photo_1 = ImageTk.PhotoImage(image_1)
         photo_2 = ImageTk.PhotoImage(image_2)
+        photo_3 = ImageTk.PhotoImage(image_3)
         
         # Crea due widget Label per visualizzare le immagini affiancate
         label_1 = tk.Label(image_window, image=photo_1)
-        label_1.grid(row=0, column=0)
+        label_1.grid(row=1, column=0)
         label_2 = tk.Label(image_window, image=photo_2)
-        label_2.grid(row=0, column=1)
+        label_2.grid(row=1, column=1)
+        label_3 = tk.Label(image_window, image=photo_3)
+        label_3.grid(row=0, column=0)
         
         # Imposta il titolo della finestra
         image_window.title("Immagini affiancate")
