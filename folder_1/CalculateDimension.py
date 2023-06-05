@@ -42,22 +42,23 @@ def calculate_hexagon_dimensions(radius, n_rows, rows_array, index):
 
     if len(rows_array) == 7:
         if rows_array[0] == 5:
-            frame = m.compute(radius * 16.314, radius * 12.394, radius * 9.158, index)
+            frame = m.compute(radius * 16.312, radius * 12.392, radius * 9.156, index)
             return frame
         else:
             frame = m.compute(radius * 18.312, radius * 12.392, radius * 11.156, index)
             return frame
         
     if len(rows_array) == 5:
-        print(radius*8.93)
-        print(radius*12.312)
-        print(radius*7.156)
-        frame = m.compute(radius * 12.312, radius * 8.93, radius * 7.156, index)
-        return frame
+        if rows_array[0] == 4:
+            frame = m.compute(radius * 12.312, radius * 8.928, radius * 7.156, index)
+            return frame
+        else:
+            frame = m.compute(radius * 10.312 , radius * 8.928, radius * 5.156, index)
+            return frame
 
     if len(rows_array) == 3:
 
-        frame = m.compute(radius * 8.32, radius * 5.472, radius * 5.161, index)
+        frame = m.compute(radius * 8.32, radius * 5.472, radius * 5.156, index)
         return frame
 
     frame = m.compute(B_max, h_max * 2, b_max, index)

@@ -59,6 +59,9 @@ def draw_hexagons(hexagons):
     # Decrease the font size of y-axis labels
     axis.set_yticklabels(axis.get_yticklabels(), fontsize=5)
 
+    # Set the aspect ratio to 'equal'
+    ax.set_aspect('equal')
+
 
     
 

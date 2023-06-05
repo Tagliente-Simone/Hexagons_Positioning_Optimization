@@ -61,7 +61,8 @@ def draw_rectangles(rectangles):
 
 
     
-
+    # Set the aspect ratio to 'equal'
+    ax.set_aspect('equal')
     
     
 

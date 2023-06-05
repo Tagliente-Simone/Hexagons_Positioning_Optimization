@@ -1,11 +1,9 @@
 from folder_1.CalculateDimension import calculate_hexagon_dimensions as cd
 from folder_2.CalculateDimension import calculate_rectangle_dimensions as cd2
 import tkinter as tk
-from tkinter import messagebox
 from tkinter import ttk
 import pandas as pd
 from PIL import ImageTk, Image
-import math
 from folder_2.Draw import draw_rectangles as draw_rects
 from folder_1.Draw import draw_hexagons as draw_hexs
 import csv
@@ -22,7 +20,7 @@ class App:
         elif float(dest)  > 40 and float(dest)  <= 50:
             compo_list = ["6-7-8-9-8-7-6", "5-6-7-8-7-6-5", "4-5-6-5-4"]
         elif float(dest)  > 50 and float(dest)  <= 70:
-            compo_list = ["4-5-6-5-4"]
+            compo_list = ["3-4-5-4-3"]
         elif float(dest)  > 70:
             compo_list = ["3-4-3"]
 
@@ -37,6 +35,7 @@ class App:
                 total = len(hexagons)
                 single = sum([int(i) for i in compo_list[i].split('-')])
                 total_tubes_1 =  single * total
+                
                 if single * weight < 25:
                     if total_tubes_1 > max_found:
                         max_found = total_tubes_1
@@ -48,8 +47,7 @@ class App:
                     console_log.insert(tk.END, log_msg)
                     console_log.config(state="disabled")
                     return -1
-
-
+                
         log_msg = "**********************************************************************\n"
         log_msg += f"Composizioni consigliate per il tubo di diametro {dest} mm:\n"
         log_msg += f"\n- Forma esagonale: {best_compo} - Peso: {round(sum([int(i) for i in best_compo.split('-')]) * weight, 2)} Kg - Tubi totali: {max_found}\n"
@@ -61,7 +59,6 @@ class App:
         draw_hexs(best_hex)
 
         return max_found
-    
     
     def save_on_csv_hex(self, hexagons):
         with open('coordinate_esagoni.csv', 'w', newline='') as csvfile:
@@ -143,7 +140,6 @@ class App:
         console_log.config(state="disabled")
         return single*total
 
-
     def __init__(self, master):
         self.master = master
         master.title("Tubi")
@@ -186,8 +182,8 @@ class App:
         diameter = float(diameters_float[1])
         weight = float(diameters_float[3])
         total_actual_hexagon = self.actual_hexagon_test(weight, diameter, self.console_log, actual_compo)
-        total_hexagon = self.hexagon_test(weight, diameter, self.console_log, total_actual_hexagon)
-        total_rectangle = self.rectangle_test(weight, diameter, self.console_log, total_actual_hexagon)
+        self.hexagon_test(weight, diameter, self.console_log, total_actual_hexagon)
+        self.rectangle_test(weight, diameter, self.console_log, total_actual_hexagon)
 
     def show_images_function(self):
         self.show_images("folder_1/images/hex.png", "folder_2/images/rect.png")
@@ -203,10 +199,6 @@ class App:
         
         diameters = df[["d_int", "d_est", "lunghezza", "peso_uni", "compo_fascio"]].values.tolist()
         return diameters
-
-
-
-
     
     def checkfloat(self, string):
         try:
@@ -239,7 +231,6 @@ class App:
         # Avvia il loop dell'interfaccia grafica
         image_window.mainloop()
     
-
 root = tk.Tk()
 root.geometry("568x400")
 root.resizable(False, False)
