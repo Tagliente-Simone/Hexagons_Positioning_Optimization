@@ -50,10 +50,10 @@ def calculate_hexagon_dimensions(radius, n_rows, rows_array, index):
         
     if len(rows_array) == 5:
         if rows_array[0] == 4:
-            frame = m.compute(radius * 12.312, radius * 8.928, radius * 7.156, index)
+            frame = m.compute(radius * 12.312, radius * 8.93, radius * 7.156, index)
             return frame
         else:
-            frame = m.compute(radius * 10.312 , radius * 8.928, radius * 5.156, index)
+            frame = m.compute(radius * 10.312 , radius * 8.93, radius * 5.156, index)
             return frame
 
     if len(rows_array) == 3:
