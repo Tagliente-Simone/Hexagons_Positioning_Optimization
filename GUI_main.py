@@ -145,6 +145,7 @@ class App:
     def __init__(self, master):
         self.master = master
         master.title("Tubi")
+    
 
         # Create input label and entry
         self.label = tk.Label(master, text="Inserisci il diametro del tubo in millimetri:")
@@ -210,8 +211,10 @@ class App:
             return False
         
     def show_images(self, image_path_1, image_path_2, image_path_3, max_size=(600, 500)):
+        
+            
         # Crea la finestra
-        image_window = tk.Toplevel()
+        new_window = tk.Toplevel()
         
         # Carica le immagini e ridimensionale se necessario
         image_1 = Image.open(image_path_1)
@@ -225,18 +228,20 @@ class App:
         photo_3 = ImageTk.PhotoImage(image_3)
         
         # Crea due widget Label per visualizzare le immagini affiancate
-        label_1 = tk.Label(image_window, image=photo_1)
+        label_1 = tk.Label(new_window, image=photo_1)
         label_1.grid(row=1, column=0)
-        label_2 = tk.Label(image_window, image=photo_2)
+        label_2 = tk.Label(new_window, image=photo_2)
         label_2.grid(row=1, column=1)
-        label_3 = tk.Label(image_window, image=photo_3)
+        label_3 = tk.Label(new_window, image=photo_3)
         label_3.grid(row=0, column=0)
         
+        
         # Imposta il titolo della finestra
-        image_window.title("Immagini affiancate")
+        new_window.title("Immagini affiancate")
+    
         
         # Avvia il loop dell'interfaccia grafica
-        image_window.mainloop()
+        new_window.mainloop()
     
 root = tk.Tk()
 root.geometry("568x400")
