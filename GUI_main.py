@@ -55,13 +55,13 @@ class App:
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")
-        self.save_on_csv_hex(best_hex)
+        self.save_on_csv_hex(best_hex, "")
         draw_hexs(best_hex, False)
 
         return max_found
     
-    def save_on_csv_hex(self, hexagons):
-        with open('coordinate_esagoni.csv', 'w', newline='') as csvfile:
+    def save_on_csv_hex(self, hexagons, actual):
+        with open('coordinate_esagoni' + actual + '.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['x', 'y'])
 
@@ -139,6 +139,7 @@ class App:
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")
         draw_hexs(hexagons, True)
+        self.save_on_csv_hex(hexagons, "_attuale")
         return single*total
 
     def __init__(self, master):
@@ -208,7 +209,7 @@ class App:
         except ValueError:
             return False
         
-    def show_images(self, image_path_1, image_path_2, image_path_3, max_size=(480, 400)):
+    def show_images(self, image_path_1, image_path_2, image_path_3, max_size=(600, 500)):
         # Crea la finestra
         image_window = tk.Toplevel()
         

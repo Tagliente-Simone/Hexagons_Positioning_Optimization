@@ -17,7 +17,7 @@ def draw_rectangles(rectangles):
 
     # Set the limits of the axes
 
-    rect_1 = Rectangle((2.5, 2.5), 120, 100, linewidth=1, edgecolor='red', facecolor='green')
+    rect_1 = Rectangle((2.5, 2.5), 120, 100, linewidth=1, facecolor='green')
 
     ax.add_patch(rect_1)
 
