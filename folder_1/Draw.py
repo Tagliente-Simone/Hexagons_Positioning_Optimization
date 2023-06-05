@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib.patches import Polygon
+import numpy as np
 
 def draw_hexagons(hexagons):
     # Create a rectangle object with width=120 and height=100
@@ -26,7 +27,7 @@ def draw_hexagons(hexagons):
     for hexagon in hexagons:
         verts = hexagon.verts
         
-        hexagon_polygon = Polygon(verts, fill=True, facecolor='white', edgecolor='black', linewidth=1)
+        hexagon_polygon = Polygon(verts, fill=True, facecolor='#D3D3D3', edgecolor='black', linewidth=0.5)
         ax.add_patch(hexagon_polygon)
         # Plotting the dot
         plt.scatter(hexagon.origin_x, hexagon.origin_y, color='black', marker='x')
@@ -38,8 +39,32 @@ def draw_hexagons(hexagons):
     ax.set_xlim(0, 125)
     ax.set_ylim(0, 105)
     
+    axis = plt.gca()
+    
+    # Set the desired step length for the x-axis
+    step = 5
 
-    plt.axis('off')
+    # Generate new tick positions based on the step length for the x-axis
+    new_xticks = np.arange(0, 125, step)
+    new_yticks = np.arange(0, 105, step)
+    
+    print(new_xticks)
+    print(new_yticks)
+    
+    # Set the new tick positions
+    axis.set_xticks(new_xticks)
+    axis.set_yticks(new_yticks)
+    
+    # Decrease the font size of x-axis labels
+    axis.set_xticklabels(axis.get_xticklabels(), fontsize=5)
+
+    # Decrease the font size of y-axis labels
+    axis.set_yticklabels(axis.get_yticklabels(), fontsize=5)
+
+
+    
+
+    #plt.axis('off')
 
     # Display the plot
     #plt.show()
