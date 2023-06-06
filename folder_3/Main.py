@@ -1,37 +1,46 @@
 from folder_3 import Trapeze as t
 
-rect_height = 104
-rect_width = 124
+rect_height = 100
+rect_width = 125
 
-def place_trapezes(B, b, h):
+def place_trapezes(B, b, b_med, h_min, h_max, radius):
     
-    origin = [B/2, h/2]
+    origin = [h_max/2, B/2]
     trapezes = []
+    
+    rotate180 = False
     
     while True:
         
-        origin[0] = B/2
+        
+        origin[0] = h_max/2
         
         while True:
-            
-            trapezes.append(t.Trapeze(B, b, h, origin[0], origin[1]))
-            if origin[0] + B + B/2 + 0.2> rect_width:
+            if rotate180:
+                trapezes.append(t.Trapeze(B, b, b_med, h_min, h_max, origin[0], origin[1]))
+                trapezes[-1].rotate180()
+            else:
+                trapezes.append(t.Trapeze(B, b, b_med, h_min, h_max, origin[0], origin[1]))
+                
+            if origin[0] + h_max + h_max/2 + 0.2> rect_width:
+                rotate180 = not rotate180
                 break
             else:
-                origin[0] += B + 0.2
-                
-        if origin[1] + h + h/2 + 0.2 > rect_height:
+                origin[0] += h_max + 0.2
+        if origin[1] + B + B/2 + 0.2 - radius > rect_height:
             break
         else:
-            origin[1] += h + 0.2
+            origin[1] += B + 0.2 - radius
 
     last_origin = (trapezes[-1].origin_x, trapezes[-1].origin_y)
     
-    slack_y = rect_height - last_origin[1] - h/2
-    slack_x = rect_width - last_origin[0] - B/2
+    slack_y = rect_height - last_origin[1] - B/2
+    slack_x = rect_width - last_origin[0] - h_max/2
     
     for trapeze in trapezes:
         trapeze.update_points(slack_x/2, slack_y/2)
+    
+
         
     
     return trapezes
@@ -40,8 +49,8 @@ def place_trapezes(B, b, h):
 
 
 
-def main(B, b, h):
+def main(B_max, b_min, b_med, h_max, h_min, radius):
     
-    trapezes = place_trapezes(B, b, h)
+    trapezes = place_trapezes(B_max, b_min, b_med, h_max, h_min, radius)
     
     return trapezes

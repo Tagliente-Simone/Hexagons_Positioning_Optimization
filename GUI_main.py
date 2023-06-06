@@ -20,7 +20,7 @@ class App:
         if float(dest) >= 30 and float(dest)  <= 40:
             compo_list = ["5-6-7-8-7-6-5", "6-7-8-9-8-7-6"]
         elif float(dest)  > 40 and float(dest)  <= 50:
-            compo_list = ["6-7-8-9-8-7-6", "5-6-7-8-7-6-5", "4-5-6-5-4", "3-4-3"]
+            compo_list = ["6-7-8-9-8-7-6", "5-6-7-8-7-6-5", "4-5-6-5-4"]
         elif float(dest)  > 50 and float(dest)  <= 70:
             compo_list = ["3-4-5-4-3", "4-5-6-5-4"]
         elif float(dest)  > 70:
@@ -146,11 +146,47 @@ class App:
     
     def trapezoid_test(self, weight, dest, console_log, total_actual_hexagon):
         
-        trapezes = cd3(float(dest)/20)
+        if float(dest) >= 30 and float(dest)  <= 40:
+            compos = ["8-7-6-5", "9-8-7-6"]
+        elif float(dest)  > 40 and float(dest)  <= 50:
+            compos = ["9-8-7-6", "8-7-6-5", "6-5-4"]
+        elif float(dest)  > 50 and float(dest)  <= 70:
+            compos = ["5-4-3", "6-5-4"]
+        elif float(dest)  > 70:
+            compos = ["4-3"]
         
-        print(len(trapezes))
+        max = 0
         
-        draw_traps(trapezes)
+        
+        for compo in compos:
+            single = sum([int(i) for i in compo.split('-')])
+            trapezes = cd3(float(dest)/20, compo)
+            total = single * len(trapezes)
+            print(total)
+            if total > max:
+                max = total
+                best_compo = compo
+                best_trapezes = trapezes
+        
+        log_msg = "\n- Forma trapezoidale: " + best_compo + " - Peso: " + str(round(sum([int(i) for i in best_compo.split('-')]) * weight, 2)) + " Kg - Tubi totali: " + str(max) + "\n"
+        log_msg += f" -----> Percentuale incremento numero di tubi: {round((max - total_actual_hexagon) / total_actual_hexagon * 100, 2)}%\n"
+        console_log.config(state="normal")
+        console_log.insert(tk.END, log_msg)
+        console_log.config(state="disabled")       
+        self.save_on_csv_trapezoid(best_trapezes)
+        draw_traps(best_trapezes)
+        
+        
+    def save_on_csv_trapezoid(self, trapezes):
+        
+        with open('coordinate_trapezi.csv', 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile, delimiter=',')
+            writer.writerow(['x', 'y'])
+
+            for trapeze in trapezes:
+                writer.writerow([round(trapeze.origin_x - 2, 2), round(trapeze.origin_y - 2, 2)]) 
+        
+        
 
     def __init__(self, master):
         self.master = master
@@ -182,7 +218,7 @@ class App:
         # Create console log
         self.console_log = tk.Text(master)
         self.console_log.config(state="disabled")
-        self.console_log.config(width=70, height=18)
+        self.console_log.config(width=70, height=20)
         self.console_log.place(x=0, y=130)
 
     def calculate_compositions(self):
@@ -200,7 +236,7 @@ class App:
         self.trapezoid_test(weight, diameter, self.console_log, total_actual_hexagon)
 
     def show_images_function(self):
-        self.show_images("images/hex.png", "images/rect.png", "images/hex_actual.png")
+        self.show_images("images/hex.png", "images/rect.png", "images/hex_actual.png", "images/trap.png")
 
     def read_diameters_from_file(self):
             
@@ -221,7 +257,7 @@ class App:
         except ValueError:
             return False
         
-    def show_images(self, image_path_1, image_path_2, image_path_3, max_size=(600, 500)):
+    def show_images(self, image_path_1, image_path_2, image_path_3, image_path_4, max_size=(600, 500)):
         
             
         # Crea la finestra
@@ -231,12 +267,15 @@ class App:
         image_1 = Image.open(image_path_1)
         image_2 = Image.open(image_path_2)
         image_3 = Image.open(image_path_3)
+        image_4 = Image.open(image_path_4)
         image_1.thumbnail(max_size, Image.LANCZOS)
         image_2.thumbnail(max_size, Image.LANCZOS)
         image_3.thumbnail(max_size, Image.LANCZOS)
+        image_4.thumbnail(max_size, Image.LANCZOS)
         photo_1 = ImageTk.PhotoImage(image_1)
         photo_2 = ImageTk.PhotoImage(image_2)
         photo_3 = ImageTk.PhotoImage(image_3)
+        photo_4 = ImageTk.PhotoImage(image_4)
         
         # Crea due widget Label per visualizzare le immagini affiancate
         label_1 = tk.Label(new_window, image=photo_1)
@@ -245,6 +284,8 @@ class App:
         label_2.grid(row=1, column=1)
         label_3 = tk.Label(new_window, image=photo_3)
         label_3.grid(row=0, column=0)
+        label_4 = tk.Label(new_window, image=photo_4)
+        label_4.grid(row=0, column=1)
         
         
         # Imposta il titolo della finestra
@@ -255,7 +296,7 @@ class App:
         new_window.mainloop()
     
 root = tk.Tk()
-root.geometry("568x400")
+root.geometry("580x500")
 root.resizable(False, False)
 app = App(root)
 root.mainloop()

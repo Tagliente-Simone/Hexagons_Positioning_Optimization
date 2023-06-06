@@ -7,8 +7,8 @@ import math
 
 
 ## Variables for the rectangle
-rect_width = 124
-rect_height = 104
+rect_width = 125
+rect_height = 100
 
 ## Variables for the hexagons
 len_no_rotation = 0
