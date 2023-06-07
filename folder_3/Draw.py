@@ -7,7 +7,7 @@ import numpy as np
 def draw_trapezes(trapezes):
     
     # Create a rectangle object with width=120 and height=100
-    rect = Rectangle((0, 0), 124, 100, facecolor='blue', edgecolor='black', linewidth=2)
+    rect = Rectangle((0, 0), 124, 101, facecolor='blue', edgecolor='black', linewidth=2)
     
 
 
@@ -19,7 +19,7 @@ def draw_trapezes(trapezes):
 
     # Set the limits of the axes
 
-    rect_1 = Rectangle((2, 0), 120, 100, linewidth=1, facecolor='green')
+    rect_1 = Rectangle((2, 0.5), 120, 100, linewidth=1, facecolor='green')
 
     ax.add_patch(rect_1)
     
@@ -37,7 +37,7 @@ def draw_trapezes(trapezes):
 
 
     ax.set_xlim(0, 124)
-    ax.set_ylim(0, 100)
+    ax.set_ylim(0, 101)
     
     axis = plt.gca()
     
@@ -45,8 +45,8 @@ def draw_trapezes(trapezes):
     step = 5
 
     # Generate new tick positions based on the step length for the x-axis
-    new_xticks = np.arange(0, 125, step)
-    new_yticks = np.arange(0, 100, step)
+    new_xticks = np.arange(0, 124, step)
+    new_yticks = np.arange(0, 101, step)
     
 
     # Set the new tick positions
@@ -66,7 +66,7 @@ def draw_trapezes(trapezes):
     
     
 
-    #plt.axis('off')
+    plt.axis('off')
     # Display the plot
     #plt.show()
     #if (index == 9999):

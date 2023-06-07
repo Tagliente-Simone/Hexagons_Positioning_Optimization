@@ -68,11 +68,17 @@ class App:
             writer.writerow(['x', 'y'])
 
             for hexagon in hexagons:
-                writer.writerow([round(hexagon.origin_x - 2, 2), round(hexagon.origin_y - 2, 2)])
+                writer.writerow([round(hexagon.origin_x - 2, 2), round(hexagon.origin_y - 0.5, 2)])
 
     def rectangle_test(self, weight, dest, console_log, total_actual_hexagon):
 
-        rows = [(4, 5), (6, 7)]
+        if float(dest) >= 30 and float(dest)  <= 40: 
+            rows = [(6, 7)]
+        elif float(dest)  > 40 and float(dest)  <= 60:
+            rows = [(6, 7), (4, 5)]
+        else:
+            rows = [(4, 5)]
+            
         log_msg = ""
         max_number = 0
         best_rect = []
@@ -120,7 +126,7 @@ class App:
             writer.writerow(['x', 'y'])
 
             for rectangle in rectangles:
-                writer.writerow([round(rectangle.center_x - 2, 2), round(rectangle.center_y - 2, 2)])
+                writer.writerow([round(rectangle.center_x - 2, 2), round(rectangle.center_y - 0.5, 2)])
     
     def actual_hexagon_test(self, weight, dest, console_log, actual_compo):
         rows_array = [float(i) for i in actual_compo.split('-')]
@@ -162,7 +168,6 @@ class App:
             single = sum([int(i) for i in compo.split('-')])
             trapezes = cd3(float(dest)/20, compo)
             total = single * len(trapezes)
-            print(total)
             if total > max:
                 max = total
                 best_compo = compo
@@ -184,7 +189,7 @@ class App:
             writer.writerow(['x', 'y'])
 
             for trapeze in trapezes:
-                writer.writerow([round(trapeze.origin_x - 2, 2), round(trapeze.origin_y - 2, 2)]) 
+                writer.writerow([round(trapeze.origin_x - 2, 2), round(trapeze.origin_y - 0.5, 2)]) 
         
         
 
@@ -257,7 +262,7 @@ class App:
         except ValueError:
             return False
         
-    def show_images(self, image_path_1, image_path_2, image_path_3, image_path_4, max_size=(600, 500)):
+    def show_images(self, image_path_1, image_path_2, image_path_3, image_path_4, max_size=(480, 400)):
         
             
         # Crea la finestra
@@ -268,10 +273,10 @@ class App:
         image_2 = Image.open(image_path_2)
         image_3 = Image.open(image_path_3)
         image_4 = Image.open(image_path_4)
-        image_1.thumbnail(max_size, Image.LANCZOS)
-        image_2.thumbnail(max_size, Image.LANCZOS)
-        image_3.thumbnail(max_size, Image.LANCZOS)
-        image_4.thumbnail(max_size, Image.LANCZOS)
+        image_1.thumbnail(max_size, Image.BILINEAR)
+        image_2.thumbnail(max_size, Image.BILINEAR)
+        image_3.thumbnail(max_size, Image.BILINEAR)
+        image_4.thumbnail(max_size, Image.BILINEAR)
         photo_1 = ImageTk.PhotoImage(image_1)
         photo_2 = ImageTk.PhotoImage(image_2)
         photo_3 = ImageTk.PhotoImage(image_3)

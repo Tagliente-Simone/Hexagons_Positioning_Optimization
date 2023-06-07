@@ -2,8 +2,10 @@ from folder_2 import Draw as d
 from folder_2 import Rectangle as r
 import csv
 
-rect_height = 100
-rect_width = 125
+rect_height = 101
+rect_width = 124
+
+inter = 0.2
 
 
 def place_rect(L, l):
@@ -26,14 +28,14 @@ def place_rect(L, l):
 
         while True:
             rectangles.append(r.Rectangle(L, l, origin[0], origin[1]))
-            if origin[0] + L + L/2 + 0.2> rect_width:
+            if origin[0] + L + L/2 + inter > rect_width:
                 break
             else:
-                origin[0] += L + 0.2
-        if origin[1] + l + l/2 + 0.2 > rect_height:
+                origin[0] += L + inter
+        if origin[1] + l + l/2 + inter > rect_height:
             break
         else:
-            origin[1] += l + 0.2
+            origin[1] += l + inter
 
     last_origin = (rectangles[-1].center_x, rectangles[-1].center_y)
 

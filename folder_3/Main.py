@@ -1,7 +1,9 @@
 from folder_3 import Trapeze as t
 
-rect_height = 100
+rect_height = 101
 rect_width = 125
+
+inter = 0.2
 
 def place_trapezes(B, b, b_med, h_min, h_max, radius):
     
@@ -22,15 +24,15 @@ def place_trapezes(B, b, b_med, h_min, h_max, radius):
             else:
                 trapezes.append(t.Trapeze(B, b, b_med, h_min, h_max, origin[0], origin[1]))
                 
-            if origin[0] + h_max + h_max/2 + 0.2> rect_width:
+            if origin[0] + h_max + h_max/2 + inter> rect_width:
                 rotate180 = not rotate180
                 break
             else:
-                origin[0] += h_max + 0.2
-        if origin[1] + B + B/2 + 0.2 - radius > rect_height:
+                origin[0] += h_max + inter
+        if origin[1] + B + B/2 + inter - radius > rect_height:
             break
         else:
-            origin[1] += B + 0.2 - radius
+            origin[1] += B + inter - radius
 
     last_origin = (trapezes[-1].origin_x, trapezes[-1].origin_y)
     

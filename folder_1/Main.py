@@ -7,12 +7,14 @@ import math
 
 
 ## Variables for the rectangle
-rect_width = 125
-rect_height = 100
+rect_width = 124
+rect_height = 101
 
 ## Variables for the hexagons
 len_no_rotation = 0
 len_rotation = 0
+
+inter = 0.2
 
 def place_vertical_hexagon(hexagons_no_rot, origin_x, origin_y, hex_width, hex_height, hex_side):
     
@@ -25,7 +27,7 @@ def place_vertical_hexagon(hexagons_no_rot, origin_x, origin_y, hex_width, hex_h
         if origin_y > last_origin_y:
             last_origin_y = origin_y
            
-        origin_y += hex_height + 0.3
+        origin_y += hex_height + inter
 
 
         ## Check if the hexagon is out of the rectangle
@@ -49,7 +51,7 @@ def place_vertical_hexagon_rotated(hexagons_rot, origin_x, origin_y, hex_width, 
         if origin_x > last_origin_x:
             last_origin_x = origin_x
         
-        origin_x += hex_height + 0.3
+        origin_x += hex_height + inter
 
         ## Check if the hexagon is out of the rectangle
         if origin_x + hex_height/2 > rect_width:
@@ -89,11 +91,11 @@ def test_no_rotation(hexagons_no_rot, hex_width, hex_height, hex_side, index):
 
         ## Update the position of the first hexagon of the new line
         if line_index % 2 == 1:
-            origin_x += hex_width - (hex_width - hex_side)/2 + 0.3/(math.sin(math.atan((hex_height) / ((hex_width - hex_side)))))
-            origin_y = start_origin_y + hex_height/2 + 0.3/2
+            origin_x += hex_width - (hex_width - hex_side)/2 + inter/(math.sin(math.atan((hex_height) / ((hex_width - hex_side)))))
+            origin_y = start_origin_y + hex_height/2 + inter/2
 
         else:
-            origin_x += hex_width - (hex_width - hex_side)/2  + 0.3
+            origin_x += hex_width - (hex_width - hex_side)/2  + inter
             origin_y = start_origin_y
 
 
@@ -134,11 +136,11 @@ def test_rotation(hexagons_rot, hex_width, hex_height, hex_side, index):
 
         ## Update the position of the first hexagon of the new line
         if line_index % 2 == 1:
-            origin_y += hex_width - (hex_width - hex_side)/2 + 0.3/(math.sin(math.atan((hex_height) / ((hex_width - hex_side)))))
-            origin_x = start_origin_x + hex_height/2 + 0.3/2
+            origin_y += hex_width - (hex_width - hex_side)/2 + inter/(math.sin(math.atan((hex_height) / ((hex_width - hex_side)))))
+            origin_x = start_origin_x + hex_height/2 + inter/2
 
         else:
-            origin_y += hex_width - (hex_width - hex_side)/2  + 0.3
+            origin_y += hex_width - (hex_width - hex_side)/2  + inter
             origin_x = start_origin_x
 
 

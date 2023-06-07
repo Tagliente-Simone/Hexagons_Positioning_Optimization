@@ -8,7 +8,7 @@ import numpy as np
 
 def draw_hexagons(hexagons, isActual):
     # Create a rectangle object with width=120 and height=100
-    rect = Rectangle((0, 0), 124, 100, facecolor='blue', edgecolor='black', linewidth=2)
+    rect = Rectangle((0, 0), 124, 101, facecolor='blue', edgecolor='black', linewidth=2)
     
 
 
@@ -18,7 +18,7 @@ def draw_hexagons(hexagons, isActual):
     # Add the rectangle to the axes
     ax.add_patch(rect)
     
-    rect_1 = Rectangle((2, 0), 120, 100, linewidth=1, facecolor='green')
+    rect_1 = Rectangle((2, 0.5), 120, 100, linewidth=1, facecolor='green')
 
     ax.add_patch(rect_1)
 
@@ -38,7 +38,7 @@ def draw_hexagons(hexagons, isActual):
     # Set the limits of the axes
 
 
-    ax.set_xlim(0, 125)
+    ax.set_xlim(0, 124)
     ax.set_ylim(0, 100)
     
     axis = plt.gca()
@@ -47,7 +47,7 @@ def draw_hexagons(hexagons, isActual):
     step = 5
 
     # Generate new tick positions based on the step length for the x-axis
-    new_xticks = np.arange(0, 125, step)
+    new_xticks = np.arange(0, 124, step)
     new_yticks = np.arange(0, 100, step)
     
 
@@ -67,7 +67,7 @@ def draw_hexagons(hexagons, isActual):
 
     
 
-    #plt.axis('off')
+    plt.axis('off')
 
     # Display the plot
     #plt.show()
