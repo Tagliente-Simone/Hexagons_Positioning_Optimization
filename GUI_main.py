@@ -1,6 +1,7 @@
 from folder_1.CalculateDimension import calculate_hexagon_dimensions as cd
 from folder_2.CalculateDimension import calculate_rectangle_dimensions as cd2
 from folder_3.CalculateDimension import calculate_trapeze_dimensions as cd3
+from folder_4.CalculateDimension import calculate_asymHex_dimensions as cd4
 import tkinter as tk
 from tkinter import ttk
 import pandas as pd
@@ -8,6 +9,7 @@ from PIL import ImageTk, Image
 from folder_2.Draw import draw_rectangles as draw_rects
 from folder_1.Draw import draw_hexagons as draw_hexs
 from folder_3.Draw import draw_trapezes as draw_traps
+from folder_4.Draw import draw_asymHex as draw_asymHexs
 import csv
 
 
@@ -167,7 +169,7 @@ class App:
         elif float(dest)  > 50 and float(dest)  <= 70:
             compos = ["5-4-3", "6-5-4", "3-4-5-4"]
         elif float(dest)  > 70:
-            compos = ["4-3", "3-4-5-4"]
+            compos = ["4-3"]
         
         max = 0
         
@@ -188,6 +190,24 @@ class App:
         console_log.config(state="disabled")       
         self.save_on_csv_trapezoid(best_trapezes)
         draw_traps(best_trapezes)
+        
+    def asym_hexagon_test(self, weight, dest, console_log, total_actual_hexagon):
+        
+        compos = ["3-4-5-4"]
+        
+        
+        single = sum([int(i) for i in compos[0].split('-')])            
+        hexs = cd4(float(dest)/20, compos[0])
+        total = single * len(hexs)
+        
+        log_msg = "\n- Forma esagonale asimmetrica: " + compos[0] + " - Peso: " + str(round(sum([int(i) for i in compos[0].split('-')]) * weight, 2)) + " Kg - Tubi totali: " + str(total) + "\n"
+        log_msg += f" -----> Percentuale incremento numero di tubi: {round((total - total_actual_hexagon) / total_actual_hexagon * 100, 2)}%\n"
+        console_log.config(state="normal")
+        console_log.insert(tk.END, log_msg)
+        console_log.config(state="disabled")
+        draw_asymHexs(hexs, False)
+        self.save_on_csv_hex(hexs, "_asimmetrico")
+            
         
         
     def save_on_csv_trapezoid(self, trapezes):
@@ -253,6 +273,7 @@ class App:
         self.hexagon_test(weight, diameter, self.console_log, total_actual_hexagon)
         self.rectangle_test(weight, diameter, self.console_log, total_actual_hexagon)
         self.trapezoid_test(weight, diameter, self.console_log, total_actual_hexagon)
+        self.asym_hexagon_test(weight, diameter, self.console_log, total_actual_hexagon)
 
     def show_images_function(self):
         self.show_images("images/hex.png", "images/rect.png", "images/hex_actual.png", "images/trap.png")
