@@ -1,12 +1,12 @@
 from folder_2 import Draw as d 
 from folder_2 import Rectangle as r
+import shared_variable as sv
 import csv
 
-rect_height = 101
-rect_width = 124
+rect_height = sv.rect_height
+rect_width = sv.rect_width
 
-inter = 0.2
-
+inter = sv.inter
 
 def place_rect(L, l):
     """

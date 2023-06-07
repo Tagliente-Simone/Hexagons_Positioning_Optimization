@@ -11,6 +11,9 @@ from folder_3.Draw import draw_trapezes as draw_traps
 import csv
 
 
+
+
+
 class App:
 
     def hexagon_test(self, weight, dest, console_log, total_actual_hexagon):

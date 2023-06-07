@@ -4,11 +4,12 @@ from matplotlib.patches import Polygon
 import matplotlib.patches as patches
 import folder_1.Hexagon as hx
 import folder_1.RotatedHexagon as hxr
+import shared_variable as sv
 import numpy as np
 
 def draw_hexagons(hexagons, isActual):
     # Create a rectangle object with width=120 and height=100
-    rect = Rectangle((0, 0), 124, 101, facecolor='blue', edgecolor='black', linewidth=2)
+    rect = Rectangle((0, 0), sv.rect_width, sv.rect_height, facecolor='blue', edgecolor='black', linewidth=2)
     
 
 
@@ -18,7 +19,7 @@ def draw_hexagons(hexagons, isActual):
     # Add the rectangle to the axes
     ax.add_patch(rect)
     
-    rect_1 = Rectangle((2, 0.5), 120, 100, linewidth=1, facecolor='green')
+    rect_1 = Rectangle((sv.start_originx, sv.start_originy), 120, 100, linewidth=1, facecolor='green')
 
     ax.add_patch(rect_1)
 
@@ -34,12 +35,17 @@ def draw_hexagons(hexagons, isActual):
         # Plotting the dot
         plt.scatter(hexagon.origin_x, hexagon.origin_y, color='black', marker='x')
         
+    
+    
+    rect_2 = Rectangle((sv.start_originx, sv.start_originy), 120, 100, linewidth=1, facecolor='none', edgecolor='red', linestyle='--')
+    ax.add_patch(rect_2)
         
+         
     # Set the limits of the axes
 
 
-    ax.set_xlim(0, 124)
-    ax.set_ylim(0, 101)
+    ax.set_xlim(0, sv.rect_width)
+    ax.set_ylim(0, sv.rect_height)
     
     axis = plt.gca()
     
@@ -47,8 +53,8 @@ def draw_hexagons(hexagons, isActual):
     step = 5
 
     # Generate new tick positions based on the step length for the x-axis
-    new_xticks = np.arange(0, 124, step)
-    new_yticks = np.arange(0, 101, step)
+    new_xticks = np.arange(0, sv.rect_width, step)
+    new_yticks = np.arange(0, sv.rect_height, step)
     
 
     # Set the new tick positions

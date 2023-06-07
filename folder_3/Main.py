@@ -1,10 +1,12 @@
 from folder_3 import Trapeze as t
 from folder_3 import RotatedTrapeze as rt
+import shared_variable as sv
 
-rect_height = 101
-rect_width = 125
+rect_width = sv.rect_width
+rect_height = sv.rect_height
 
-inter = 0.2
+
+inter = sv.inter
 
 def place_trapezes(B, b, b_med, h_min, h_max, radius):
     

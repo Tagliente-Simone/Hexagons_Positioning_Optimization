@@ -2,19 +2,20 @@ from folder_1 import Hexagon as hx
 from folder_1 import RotatedHexagon as rhx
 from folder_1 import Draw as dr
 import csv
+import shared_variable as sv
 import math
 ## This function places the vertical line of hexagons
 
 
 ## Variables for the rectangle
-rect_width = 124
-rect_height = 101
+rect_width = sv.rect_width
+rect_height = sv.rect_height
 
 ## Variables for the hexagons
 len_no_rotation = 0
 len_rotation = 0
 
-inter = 0.2
+inter = sv.inter
 
 def place_vertical_hexagon(hexagons_no_rot, origin_x, origin_y, hex_width, hex_height, hex_side):
     
