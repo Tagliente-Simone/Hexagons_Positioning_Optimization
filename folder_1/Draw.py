@@ -39,7 +39,7 @@ def draw_hexagons(hexagons, isActual):
 
 
     ax.set_xlim(0, 124)
-    ax.set_ylim(0, 100)
+    ax.set_ylim(0, 101)
     
     axis = plt.gca()
     
@@ -48,7 +48,7 @@ def draw_hexagons(hexagons, isActual):
 
     # Generate new tick positions based on the step length for the x-axis
     new_xticks = np.arange(0, 124, step)
-    new_yticks = np.arange(0, 100, step)
+    new_yticks = np.arange(0, 101, step)
     
 
     # Set the new tick positions
