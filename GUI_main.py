@@ -216,6 +216,12 @@ class App:
         self.calculate_button = tk.Button(master, text="Mostra Immagini", command=self.show_images_function)
         self.calculate_button.place(x=130, y=80)
 
+        # Create button to calculate tube compositions
+        self.calculate_button = tk.Button(master, text="Ricarica Immagini", command=self.reload_images_function)
+        self.calculate_button.place(x=280, y=80)
+
+        
+
         # Label Text
         self.label_text = tk.Label(master, text="d_int\td_est\tlunghezza\tpeso_uni")
         self.label_text.place(x=10, y=20)
@@ -266,6 +272,7 @@ class App:
         
             
         # Crea la finestra
+        global new_window
         new_window = tk.Toplevel()
         
         # Carica le immagini e ridimensionale se necessario
@@ -299,6 +306,40 @@ class App:
         
         # Avvia il loop dell'interfaccia grafica
         new_window.mainloop()
+
+    def reload_images_function(self):
+        self.reload_images("images/hex.png", "images/rect.png", "images/hex_actual.png", "images/trap.png")
+
+    def reload_images(self, image_path_1, image_path_2, image_path_3, image_path_4, max_size=(480, 400)):
+
+        # Carica le immagini e ridimensionale se necessario
+        image_1 = Image.open(image_path_1)
+        image_2 = Image.open(image_path_2)
+        image_3 = Image.open(image_path_3)
+        image_4 = Image.open(image_path_4)
+        image_1.thumbnail(max_size, Image.BILINEAR)
+        image_2.thumbnail(max_size, Image.BILINEAR)
+        image_3.thumbnail(max_size, Image.BILINEAR)
+        image_4.thumbnail(max_size, Image.BILINEAR)
+        photo_1 = ImageTk.PhotoImage(image_1)
+        photo_2 = ImageTk.PhotoImage(image_2)
+        photo_3 = ImageTk.PhotoImage(image_3)
+        photo_4 = ImageTk.PhotoImage(image_4)
+        
+        # Crea due widget Label per visualizzare le immagini affiancate
+        label_1 = tk.Label(new_window, image=photo_1)
+        label_1.grid(row=1, column=0)
+        label_2 = tk.Label(new_window, image=photo_2)
+        label_2.grid(row=1, column=1)
+        label_3 = tk.Label(new_window, image=photo_3)
+        label_3.grid(row=0, column=0)
+        label_4 = tk.Label(new_window, image=photo_4)
+        label_4.grid(row=0, column=1)
+
+        # Avvia il loop dell'interfaccia grafica
+        new_window.mainloop()
+
+
     
 root = tk.Tk()
 root.geometry("580x500")
