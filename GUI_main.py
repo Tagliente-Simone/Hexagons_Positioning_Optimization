@@ -132,6 +132,11 @@ class App:
                 writer.writerow([round(rectangle.center_x - 2, 2), round(rectangle.center_y - 0.5, 2)])
     
     def actual_hexagon_test(self, weight, dest, console_log, actual_compo):
+        
+        if actual_compo == "3-4-5-4":
+            return 1
+        
+        
         rows_array = [float(i) for i in actual_compo.split('-')]
         if(len(rows_array) % 2 == 1):
                 n_rows = len(rows_array)
@@ -160,9 +165,9 @@ class App:
         elif float(dest)  > 40 and float(dest)  <= 50:
             compos = ["9-8-7-6", "8-7-6-5", "6-5-4"]
         elif float(dest)  > 50 and float(dest)  <= 70:
-            compos = ["5-4-3", "6-5-4"]
+            compos = ["5-4-3", "6-5-4", "3-4-5-4"]
         elif float(dest)  > 70:
-            compos = ["4-3"]
+            compos = ["4-3", "3-4-5-4"]
         
         max = 0
         
