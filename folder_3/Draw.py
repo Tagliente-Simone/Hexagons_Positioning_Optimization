@@ -29,7 +29,7 @@ def draw_trapezes(trapezes):
         trapeze_polygon = Polygon(verts, fill=True, facecolor='#D3D3D3', edgecolor='black', linewidth=0.5)
         ax.add_patch(trapeze_polygon)
         # Plotting the dot
-        plt.scatter(trapeze.origin_x, trapeze.origin_y, color='black', marker='x')
+        plt.scatter(trapeze.origin_x, trapeze.origin_y, color='black', marker='o')
         
         
 

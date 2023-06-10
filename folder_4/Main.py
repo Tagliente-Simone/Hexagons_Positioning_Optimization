@@ -17,34 +17,50 @@ def place_asym_hexs(B, b, b_med, h_min, h_max, radius):
     
     iter = 0
     
+    max_origin_x = 0
+    max_origin_y = 0
+    
     while True:
         
-        
-        origin[0] = h_max/2 + iter%2*(h_max/2)
+        if iter % 2 == 0:
+            origin[0] = h_max/2
+        else:
+            origin[0] = h_max
         
         while True:
-            if rotate180:
-                asym_hexs.append(t.AsymHex(B, b, b_med, h_min, h_max, origin[0], origin[1]))
-                asym_hexs[-1].rotate180()
-            else:
+            if  rotate180:
                 asym_hexs.append(t.AsymHex(B, b, b_med, h_min, h_max, origin[0], origin[1]))
                 
+            else:
+                asym_hexs.append(t.AsymHex(B, b, b_med, h_min, h_max, origin[0], origin[1]))
+                asym_hexs[-1].rotate180()
+                
+            if max_origin_x < origin[0]:
+                max_origin_x = origin[0]
+                
             if origin[0] + h_max + h_max/2 + inter > rect_width:
-                rotate180 = not rotate180
                 break
             else:
                 origin[0] += h_max + inter
-        if origin[1] + B - (B-b_med)/2 + inter > rect_height:
+                
+            
+                
+                
+        if max_origin_y < origin[1]:
+            max_origin_y = origin[1]
+                
+        if origin[1] + B + B/2 - 1.25*(B-b_med)/2 + inter > rect_height:
             break
         else:
-            origin[1] += B - (B-b_med)/2 + inter
+            origin[1] += B - 1.25*(B-b_med)/2  + inter
 
+        
+            
         iter += 1
         
-    last_origin = (asym_hexs[-1].origin_x, asym_hexs[-1].origin_y)
     
-    slack_y = rect_height - last_origin[1] - B/2
-    slack_x = rect_width - last_origin[0] - h_max/2
+    slack_y = rect_height - max_origin_y - B/2
+    slack_x = rect_width - max_origin_x - h_max/2
     
     for asym_hex in asym_hexs:
         asym_hex.update_points(slack_x/2, slack_y/2)

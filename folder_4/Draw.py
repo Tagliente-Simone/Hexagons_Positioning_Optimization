@@ -33,7 +33,7 @@ def draw_asymHex(hexagons, isActual):
         hexagon_polygon = Polygon(verts, fill=True, facecolor='#D3D3D3', edgecolor='black', linewidth=0.5)
         ax.add_patch(hexagon_polygon)
         # Plotting the dot
-        plt.scatter(hexagon.origin_x, hexagon.origin_y, color='black', marker='x')
+        plt.scatter(hexagon.origin_x, hexagon.origin_y, color='black', marker='o')
         
     
     

@@ -11,6 +11,7 @@ from folder_1.Draw import draw_hexagons as draw_hexs
 from folder_3.Draw import draw_trapezes as draw_traps
 from folder_4.Draw import draw_asymHex as draw_asymHexs
 import csv
+import shared_variable as sv
 
 
 
@@ -23,7 +24,7 @@ class App:
         best_compo = ""
 
         if float(dest) >= 30 and float(dest)  <= 40:
-            compo_list = ["5-6-7-8-7-6-5", "6-7-8-9-8-7-6"]
+            compo_list = ["5-6-7-8-7-6-5", "6-7-8-9-8-7-6", "4-5-6-5-4"]
         elif float(dest)  > 40 and float(dest)  <= 50:
             compo_list = ["6-7-8-9-8-7-6", "5-6-7-8-7-6-5", "4-5-6-5-4"]
         elif float(dest)  > 50 and float(dest)  <= 70:
@@ -73,7 +74,7 @@ class App:
             writer.writerow(['x', 'y'])
 
             for hexagon in hexagons:
-                writer.writerow([round(hexagon.origin_x - 2, 2), round(hexagon.origin_y - 0.5, 2)])
+                writer.writerow([round(hexagon.origin_x - sv.start_originx, 2), round(hexagon.origin_y - sv.start_originy, 2)])
 
     def rectangle_test(self, weight, dest, console_log, total_actual_hexagon):
 
@@ -131,7 +132,7 @@ class App:
             writer.writerow(['x', 'y'])
 
             for rectangle in rectangles:
-                writer.writerow([round(rectangle.center_x - 2, 2), round(rectangle.center_y - 0.5, 2)])
+                writer.writerow([round(rectangle.center_x - sv.start_originx, 2), round(rectangle.center_y - sv.start_originy, 2)])
     
     def actual_hexagon_test(self, weight, dest, console_log, actual_compo):
         
@@ -167,7 +168,7 @@ class App:
         elif float(dest)  > 40 and float(dest)  <= 50:
             compos = ["9-8-7-6", "8-7-6-5", "6-5-4"]
         elif float(dest)  > 50 and float(dest)  <= 70:
-            compos = ["5-4-3", "6-5-4", "3-4-5-4"]
+            compos = ["5-4-3", "6-5-4"]
         elif float(dest)  > 70:
             compos = ["4-3"]
         
@@ -217,7 +218,7 @@ class App:
             writer.writerow(['x', 'y'])
 
             for trapeze in trapezes:
-                writer.writerow([round(trapeze.origin_x - 2, 2), round(trapeze.origin_y - 0.5, 2)]) 
+                writer.writerow([round(trapeze.origin_x - sv.start_originx, 2), round(trapeze.origin_y - sv.start_originy, 2)]) 
         
         
 
@@ -257,7 +258,7 @@ class App:
         # Create console log
         self.console_log = tk.Text(master)
         self.console_log.config(state="disabled")
-        self.console_log.config(width=70, height=20)
+        self.console_log.config(width=100, height=20)
         self.console_log.place(x=0, y=130)
 
     def calculate_compositions(self):
@@ -271,12 +272,12 @@ class App:
         weight = float(diameters_float[3])
         total_actual_hexagon = self.actual_hexagon_test(weight, diameter, self.console_log, actual_compo)
         self.hexagon_test(weight, diameter, self.console_log, total_actual_hexagon)
-        self.rectangle_test(weight, diameter, self.console_log, total_actual_hexagon)
+        #self.rectangle_test(weight, diameter, self.console_log, total_actual_hexagon)
         self.trapezoid_test(weight, diameter, self.console_log, total_actual_hexagon)
         self.asym_hexagon_test(weight, diameter, self.console_log, total_actual_hexagon)
 
     def show_images_function(self):
-        self.show_images("images/hex.png", "images/rect.png", "images/hex_actual.png", "images/trap.png")
+        self.show_images("images/hex.png", "images/asym.png", "images/hex_actual.png", "images/trap.png")
 
     def read_diameters_from_file(self):
             
@@ -337,7 +338,7 @@ class App:
         new_window.mainloop()
 
     def reload_images_function(self):
-        self.reload_images("images/hex.png", "images/rect.png", "images/hex_actual.png", "images/trap.png")
+        self.reload_images("images/hex.png", "images/asym.png", "images/hex_actual.png", "images/trap.png")
 
     def reload_images(self, image_path_1, image_path_2, image_path_3, image_path_4, max_size=(480, 400)):
 
@@ -371,7 +372,7 @@ class App:
 
     
 root = tk.Tk()
-root.geometry("580x500")
+root.geometry("680x500")
 root.resizable(False, False)
 app = App(root)
 root.mainloop()

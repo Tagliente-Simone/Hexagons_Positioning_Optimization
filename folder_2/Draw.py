@@ -32,7 +32,7 @@ def draw_rectangles(rectangles):
         rectangle_polygon = Polygon(verts, fill=True, facecolor='#D3D3D3', edgecolor='black', linewidth=0.5)
         ax.add_patch(rectangle_polygon)
         # Plotting the dot
-        plt.scatter(rectangle.center_x, rectangle.center_y, color='black', marker='x')
+        plt.scatter(rectangle.center_x, rectangle.center_y, color='black', marker='o')
         
     rect_2 = Rectangle((sv.start_originx, sv.start_originy), 120, 100, linewidth=1, facecolor='none', edgecolor='red', linestyle='--')
     ax.add_patch(rect_2)    
