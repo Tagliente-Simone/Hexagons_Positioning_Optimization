@@ -1,3 +1,5 @@
+import shared_variable as sv
+
 class RotatedAsymHex:
     
     def __init__(self, a, b, b_med, h_min, h_max, origin_x, origin_y):
@@ -37,3 +39,13 @@ class RotatedAsymHex:
                                 (self.origin_x + self.b/2, self.origin_y - self.h_max/2),
                                 (self.origin_x + self.a/2, self.origin_y + (self.h_max/2 - self.h_min)),
                                 ]
+                
+
+
+    def invert_asym_hex(self):
+        
+        self.origin_x = sv.rect_width - self.origin_x
+        self.origin_y = sv.rect_height - self.origin_y
+
+        for i in range(len(self.verts)):
+            self.verts[i] = (sv.rect_width - self.verts[i][0], sv.rect_height - self.verts[i][1])

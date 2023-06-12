@@ -1,7 +1,7 @@
 
 
-rect_width = 124
-rect_height = 101
+rect_width = 125
+rect_height = 102
 
 start_originx = (rect_width - 120)/2
 start_originy = (rect_height - 100)/2

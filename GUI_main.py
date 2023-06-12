@@ -74,7 +74,7 @@ class App:
             writer.writerow(['x', 'y'])
 
             for hexagon in hexagons:
-                writer.writerow([round(hexagon.origin_x - sv.start_originx, 2), round(hexagon.origin_y - sv.start_originy, 2)])
+                writer.writerow([round((hexagon.origin_x - sv.start_originx)*10, 0), round((hexagon.origin_y - sv.start_originy)*10, 0)])
 
     def rectangle_test(self, weight, dest, console_log, total_actual_hexagon):
 

@@ -102,8 +102,11 @@ def main(B_max, b_min, b_med, h_max, h_min, radius):
     rotated_trapezes = place_rotated_trapezes(B_max, b_min, b_med, h_max, h_min, radius)
     
     if len(rotated_trapezes) > len(trapezes):
-
+        for rotated_trapeze in rotated_trapezes:
+            rotated_trapeze.invert_trapeze()
         return rotated_trapezes
     
     else:
+        for trapeze in trapezes:
+            trapeze.invert_trapeze()
         return trapezes

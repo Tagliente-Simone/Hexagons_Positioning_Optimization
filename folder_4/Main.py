@@ -121,5 +121,7 @@ def main(B_max, b_min, b_med, h_max, h_min, radius):
 
     #rotated_asym_hexs = place_rotated_asym_hexs(B_max, b_min, b_med, h_max, h_min, radius)
     
+    for asym_hex in asym_hexs:
+        asym_hex.invert_asym_hex()
 
     return asym_hexs
