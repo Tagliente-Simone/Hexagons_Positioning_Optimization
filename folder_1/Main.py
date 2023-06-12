@@ -210,8 +210,12 @@ def compute(hex_width, hex_height, hex_side, index):
 
 
     if(len(hexagons_no_rot) > len(hexagons_rot)):
+        for hexagon in hexagons_no_rot:
+            hexagon.invert_hexagon()
         return hexagons_no_rot
     else:
+        for hexagon in hexagons_rot:
+            hexagon.invert_hexagon()
         return hexagons_rot
 
 

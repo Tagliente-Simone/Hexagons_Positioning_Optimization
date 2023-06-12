@@ -1,5 +1,7 @@
 ## This class represents a hexagon object with its origin and its vertices (6 points).
 # The vertices are stored in a list of tuples. The vertices are ordered in a clockwise manner.
+import shared_variable as sv
+
 class Hexagon:
 
     ## Constructor
@@ -46,4 +48,13 @@ class Hexagon:
             self.verts[i] = (self.verts[i][0] + slack_x, self.verts[i][1] + slack_y)
 
 
+    def invert_hexagon(self):
+        
+        self.origin_x = sv.rect_width - self.origin_x
+        self.origin_y = sv.rect_height - self.origin_y
+
+        for i in range(len(self.verts)):
+            self.verts[i] = (sv.rect_width - self.verts[i][0], sv.rect_height - self.verts[i][1])
+
+    
 
