@@ -19,7 +19,7 @@ def draw_hexagons(hexagons, isActual):
     # Add the rectangle to the axes
     ax.add_patch(rect)
     
-    rect_1 = Rectangle((sv.start_originx, sv.start_originy), 120, 100, linewidth=1, facecolor='green')
+    rect_1 = Rectangle((sv.start_originx, sv.start_originy), 1200, 1000, linewidth=1, facecolor='green')
 
     ax.add_patch(rect_1)
 
@@ -37,7 +37,7 @@ def draw_hexagons(hexagons, isActual):
         
     
     
-    rect_2 = Rectangle((sv.start_originx, sv.start_originy), 120, 100, linewidth=1, facecolor='none', edgecolor='red', linestyle='--')
+    rect_2 = Rectangle((sv.start_originx, sv.start_originy), 1200, 1000, linewidth=1, facecolor='none', edgecolor='red', linestyle='--')
     ax.add_patch(rect_2)
         
          
@@ -50,7 +50,7 @@ def draw_hexagons(hexagons, isActual):
     axis = plt.gca()
     
     # Set the desired step length for the x-axis
-    step = 5
+    step = 50
 
     # Generate new tick positions based on the step length for the x-axis
     new_xticks = np.arange(0, sv.rect_width, step)
@@ -73,7 +73,7 @@ def draw_hexagons(hexagons, isActual):
 
     
 
-    plt.axis('off')
+    #plt.axis('off')
 
     # Display the plot
     #plt.show()

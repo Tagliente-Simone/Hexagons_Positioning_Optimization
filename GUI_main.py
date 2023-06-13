@@ -37,7 +37,7 @@ class App:
             if(len(rows_array) % 2 == 1):
                 n_rows = len(rows_array)
                 radius = float(dest)
-                radius = radius / 20
+                radius = radius / 2
                 #Call the function to calculate the dimension of the hexagon
                 hexagons = cd(radius, n_rows, rows_array, 9999)
                 total = len(hexagons)
@@ -74,7 +74,7 @@ class App:
             writer.writerow(['x', 'y'])
 
             for hexagon in hexagons:
-                writer.writerow([round((hexagon.origin_x - sv.start_originx)*10, 0), round((hexagon.origin_y - sv.start_originy)*10, 0)])
+                writer.writerow([int(round(hexagon.origin_x - sv.start_originx)), int(round(hexagon.origin_y - sv.start_originy))])
 
     def rectangle_test(self, weight, dest, console_log, total_actual_hexagon):
 
@@ -91,7 +91,7 @@ class App:
 
         for row in rows:
             
-            rects = cd2(float(dest)/20, row[0], row[1], row[1], weight)
+            rects = cd2(float(dest)/2, row[0], row[1], row[1], weight)
             total_rect = len(rects)
             single_rect = (row[1] * int((row[1] / 2)) + row[0] * (row[1] - int((row[1]) / 2)))
             total_tubes = total_rect * single_rect
@@ -132,7 +132,7 @@ class App:
             writer.writerow(['x', 'y'])
 
             for rectangle in rectangles:
-                writer.writerow([round(rectangle.center_x - sv.start_originx, 2), round(rectangle.center_y - sv.start_originy, 2)])
+                writer.writerow([int(round(rectangle.center_x - sv.start_originx)), int(round(rectangle.center_y - sv.start_originy))])
     
     def actual_hexagon_test(self, weight, dest, console_log, actual_compo):
         
@@ -144,7 +144,7 @@ class App:
         if(len(rows_array) % 2 == 1):
                 n_rows = len(rows_array)
                 radius = float(dest)
-                radius = radius / 20
+                radius = radius / 2
                 #Call the function to calculate the dimension of the hexagon
                 hexagons = cd(radius, n_rows, rows_array, 9999)
                 total = len(hexagons)
@@ -177,7 +177,7 @@ class App:
         
         for compo in compos:
             single = sum([int(i) for i in compo.split('-')])
-            trapezes = cd3(float(dest)/20, compo)
+            trapezes = cd3(float(dest)/2, compo)
             total = single * len(trapezes)
             if total > max:
                 max = total
@@ -198,7 +198,7 @@ class App:
         
         
         single = sum([int(i) for i in compos[0].split('-')])            
-        hexs = cd4(float(dest)/20, compos[0])
+        hexs = cd4(float(dest)/2, compos[0])
         total = single * len(hexs)
         
         log_msg = "\n- Forma esagonale asimmetrica: " + compos[0] + " - Peso: " + str(round(sum([int(i) for i in compos[0].split('-')]) * weight, 2)) + " Kg - Tubi totali: " + str(total) + "\n"
@@ -218,7 +218,7 @@ class App:
             writer.writerow(['x', 'y'])
 
             for trapeze in trapezes:
-                writer.writerow([round(trapeze.origin_x - sv.start_originx, 2), round(trapeze.origin_y - sv.start_originy, 2)]) 
+                writer.writerow([int(round(trapeze.origin_x - sv.start_originx)), int(round(trapeze.origin_y - sv.start_originy))])
         
         
 
@@ -298,7 +298,7 @@ class App:
         except ValueError:
             return False
         
-    def show_images(self, image_path_1, image_path_2, image_path_3, image_path_4, max_size=(480, 400)):
+    def show_images(self, image_path_1, image_path_2, image_path_3, image_path_4, max_size=(600, 500)):
         
             
         # Crea la finestra
@@ -314,10 +314,18 @@ class App:
         image_2.thumbnail(max_size, Image.BILINEAR)
         image_3.thumbnail(max_size, Image.BILINEAR)
         image_4.thumbnail(max_size, Image.BILINEAR)
-        photo_1 = ImageTk.PhotoImage(image_1)
-        photo_2 = ImageTk.PhotoImage(image_2)
-        photo_3 = ImageTk.PhotoImage(image_3)
-        photo_4 = ImageTk.PhotoImage(image_4)
+        mirror1 = image_1.transpose(Image.FLIP_LEFT_RIGHT)
+
+        mirror2 = image_2.transpose(Image.FLIP_LEFT_RIGHT)
+
+        mirror3 = image_3.transpose(Image.FLIP_LEFT_RIGHT)
+
+        mirror4 = image_4.transpose(Image.FLIP_LEFT_RIGHT)
+
+        photo_1 = ImageTk.PhotoImage(mirror1)
+        photo_2 = ImageTk.PhotoImage(mirror2)
+        photo_3 = ImageTk.PhotoImage(mirror3)
+        photo_4 = ImageTk.PhotoImage(mirror4)
         
         # Crea due widget Label per visualizzare le immagini affiancate
         label_1 = tk.Label(new_window, image=photo_1)

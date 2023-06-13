@@ -198,6 +198,7 @@ def centering_rotation(hexagons_rot, highest_x, hex_width, hex_height, hex_side)
 ## Main Function calls
 
 def compute(hex_width, hex_height, hex_side, index):
+    print(hex_width, hex_height, hex_side)
 
     hexagons_no_rot = []
     hexagons_rot = []

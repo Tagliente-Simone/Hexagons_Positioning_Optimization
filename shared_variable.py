@@ -1,9 +1,9 @@
 
 
-rect_width = 124
-rect_height = 101
+rect_width = 1240
+rect_height = 1010
 
-start_originx = (rect_width - 120)/2
-start_originy = (rect_height - 100)/2
+start_originx = (rect_width - 1200)/2
+start_originy = (rect_height - 1000)/2
 
-inter = 0.2
+inter = 2
