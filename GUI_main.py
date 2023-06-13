@@ -63,13 +63,13 @@ class App:
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")
-        self.save_on_csv_hex(best_hex, "")
+        self.save_on_csv_hex(best_hex, "", dest)
         draw_hexs(best_hex, False)
 
         return max_found
     
-    def save_on_csv_hex(self, hexagons, actual):
-        with open('coordinate_esagoni' + actual + '.csv', 'w', newline='') as csvfile:
+    def save_on_csv_hex(self, hexagons, actual, dest):
+        with open('./coordinate/' + str(int(dest)) + 'coordinate_esagoni' + actual + '.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['x', 'y'])
 
@@ -158,7 +158,7 @@ class App:
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")
         draw_hexs(hexagons, True)
-        self.save_on_csv_hex(hexagons, "_attuale")
+        self.save_on_csv_hex(hexagons, "_attuale", dest)
         return single*total
     
     def trapezoid_test(self, weight, dest, console_log, total_actual_hexagon):
@@ -189,7 +189,7 @@ class App:
         console_log.config(state="normal")
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")       
-        self.save_on_csv_trapezoid(best_trapezes)
+        self.save_on_csv_trapezoid(best_trapezes, dest)
         draw_traps(best_trapezes)
         
     def asym_hexagon_test(self, weight, dest, console_log, total_actual_hexagon):
@@ -207,13 +207,13 @@ class App:
         console_log.insert(tk.END, log_msg)
         console_log.config(state="disabled")
         draw_asymHexs(hexs, False)
-        self.save_on_csv_hex(hexs, "_asimmetrico")
+        self.save_on_csv_hex(hexs, "_asimmetrico", dest)
             
         
         
-    def save_on_csv_trapezoid(self, trapezes):
+    def save_on_csv_trapezoid(self, trapezes, dest):
         
-        with open('coordinate_trapezi.csv', 'w', newline='') as csvfile:
+        with open('./coordinate/' + str(int(dest)) + 'coordinate_trapezi.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['x', 'y'])
 
